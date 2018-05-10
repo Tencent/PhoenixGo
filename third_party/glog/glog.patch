@@ -1,0 +1,12 @@
+diff --git bazel/glog.bzl bazel/glog.bzl
+index b33f1aa..502a61c 100644
+--- bazel/glog.bzl
++++ bazel/glog.bzl
+@@ -69,6 +69,7 @@ def glog_library(namespace='google', with_gflags=1):
+             '-DHAVE_SIGACTION',
+             # For logging.cc.
+             '-DHAVE_PREAD',
++            '-DHAVE_UNISTD_H',
+ 
+             # Include generated header files.
+             '-I%s/glog_internal' % gendir,

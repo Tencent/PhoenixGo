@@ -1,0 +1,78 @@
+diff --git tensorflow/workspace.bzl tensorflow/workspace.bzl
+index 0ce5cda..e6f12e7 100644
+--- tensorflow/workspace.bzl
++++ tensorflow/workspace.bzl
+@@ -414,11 +414,11 @@ def tf_workspace(path_prefix="", tf_repo_name=""):
+   tf_http_archive(
+       name = "com_github_gflags_gflags",
+       urls = [
+-          "https://mirror.bazel.build/github.com/gflags/gflags/archive/f8a0efe03aa69b3336d8e228b37d4ccb17324b88.tar.gz",
+-          "https://github.com/gflags/gflags/archive/f8a0efe03aa69b3336d8e228b37d4ccb17324b88.tar.gz",
++          "https://mirror.bazel.build/github.com/gflags/gflags/archive/77592648e3f3be87d6c7123eb81cbad75f9aef5a.tar.gz",
++          "https://github.com/gflags/gflags/archive/77592648e3f3be87d6c7123eb81cbad75f9aef5a.tar.gz",
+       ],
+-      sha256 = "4d222fab8f1ede4709cdff417d15a1336f862d7334a81abf76d09c15ecf9acd1",
+-      strip_prefix = "gflags-f8a0efe03aa69b3336d8e228b37d4ccb17324b88",
++      sha256 = "6e16c8bc91b1310a44f3965e616383dbda48f83e8c1eaa2370a215057b00cabe",
++      strip_prefix = "gflags-77592648e3f3be87d6c7123eb81cbad75f9aef5a",
+   )
+ 
+   tf_http_archive(
+diff --git third_party/tensorrt/BUILD.tpl third_party/tensorrt/BUILD.tpl
+index 57682e8..b1c64f8 100644
+--- third_party/tensorrt/BUILD.tpl
++++ third_party/tensorrt/BUILD.tpl
+@@ -34,6 +34,38 @@ cc_library(
+     visibility = ["//visibility:public"],
+ )
+ 
++cc_library(
++    name = "nv_infer_plugin",
++    srcs = [%{nv_infer_plugin}],
++    data = [%{nv_infer_plugin}],
++    includes = [
++        "include",
++    ],
++    copts= cuda_default_copts(),
++    deps = [
++        "@local_config_cuda//cuda:cuda",
++        ":tensorrt_headers",
++    ],
++    linkstatic = 1,
++    visibility = ["//visibility:public"],
++)
++
++cc_library(
++    name = "nv_parsers",
++    srcs = [%{nv_parsers}],
++    data = [%{nv_parsers}],
++    includes = [
++        "include",
++    ],
++    copts= cuda_default_copts(),
++    deps = [
++        "@local_config_cuda//cuda:cuda",
++        ":tensorrt_headers",
++    ],
++    linkstatic = 1,
++    visibility = ["//visibility:public"],
++)
++
+ 
+ %{tensorrt_genrules}
+ 
+diff --git third_party/tensorrt/tensorrt_configure.bzl third_party/tensorrt/tensorrt_configure.bzl
+index 8e76e5d..0c88507 100644
+--- third_party/tensorrt/tensorrt_configure.bzl
++++ third_party/tensorrt/tensorrt_configure.bzl
+@@ -19,8 +19,8 @@ load(
+ _TENSORRT_INSTALL_PATH = "TENSORRT_INSTALL_PATH"
+ _TF_TENSORRT_VERSION = "TF_TENSORRT_VERSION"
+ 
+-_TF_TENSORRT_LIBS = ["nvinfer"]
+-_TF_TENSORRT_HEADERS = ["NvInfer.h", "NvUtils.h"]
++_TF_TENSORRT_LIBS = ["nvinfer", "nvinfer_plugin", "nvparsers"]
++_TF_TENSORRT_HEADERS = ["NvInfer.h", "NvUtils.h", "NvInferPlugin.h", "NvUffParser.h", "NvCaffeParser.h"]
+ 
+ _DEFINE_TENSORRT_SONAME_MAJOR = "#define NV_TENSORRT_SONAME_MAJOR"
+ _DEFINE_TENSORRT_SONAME_MINOR = "#define NV_TENSORRT_SONAME_MINOR"

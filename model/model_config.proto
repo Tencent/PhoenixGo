@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+message ModelConfig {
+    string train_dir = 1;
+    string checkpoint_path = 2;
+    string meta_graph_path = 3;
+    int32 intra_op_parallelism_threads = 6;
+    int32 inter_op_parallelism_threads = 7;
+    bool enable_mkl = 8;
+    int32 kmp_blocktime = 9;
+    bool kmp_settings = 10;
+    string kmp_affinity = 11;
+    bool enable_xla = 12;
+    bool enable_tensorrt = 15;
+    string tensorrt_model_path = 16;
+}

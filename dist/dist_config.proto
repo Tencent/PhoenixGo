@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+message DistConfig {
+    int32 timeout_ms = 1;
+    bool enable_leaky_bucket = 2;
+    int32 leaky_bucket_size = 3;
+    int32 leaky_bucket_refill_period_ms = 4;
+}

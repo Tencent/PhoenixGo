@@ -1,0 +1,90 @@
+syntax = "proto3";
+
+import "model/model_config.proto";
+import "dist/dist_config.proto";
+
+message MCTSConfig {
+    int32 num_eval_threads = 1;
+    int32 num_search_threads = 2;
+    int32 max_search_tree_size = 3;
+    int32 max_children_per_node = 4;
+    int32 timeout_ms_per_step = 5;
+    int32 max_simulations_per_step = 6;
+    int32 eval_batch_size = 7;
+    int32 eval_wait_batch_timeout_us = 8;
+    ModelConfig model_config = 9;
+    string gpu_list = 10;
+    bool enable_dist = 11;
+    repeated string dist_svr_addrs = 12;
+    DistConfig dist_config = 13;
+    float genmove_temperature = 14;
+    float c_puct = 15;
+    float virtual_loss = 16;
+    int32 virtual_loss_mode = 17; // 0 - act+ucb, 1 - act, 2 - ucb, 3 - none
+    bool enable_resign = 18;
+    float v_resign = 19;
+    int32 resign_mode = 20;
+    bool enable_dirichlet_noise = 21;
+    float dirichlet_noise_alpha = 22;
+    float dirichlet_noise_ratio = 23;
+    int32 monitor_log_every_ms = 24;
+    int32 get_best_move_mode = 25; // 0 by mcts, 1 by policy, 2 by value
+    bool enable_background_search = 26;
+    bool enable_policy_temperature = 27;
+    float policy_temperature = 28;
+    bool disable_transform = 29;
+    bool disable_pass = 30;
+    float default_act = 31;
+    bool inherit_default_act = 32;
+    float inherit_default_act_factor = 33;
+    bool clear_search_tree_per_move = 34;
+
+    // async
+    bool enable_async = 51;
+    int32 eval_task_queue_size = 52;
+
+    message DebuggerConfig {
+        int32 print_tree_depth = 1;
+        int32 print_tree_width = 2;
+    };
+    DebuggerConfig debugger = 60;
+
+    // rules for foxwq
+    bool disable_double_pass_scoring = 81;
+    bool disable_positional_superko = 82;
+    int32 max_gen_passes = 83;
+    bool enable_pass_pass = 84;
+
+    message EarlyStopConfig {
+        bool enable = 1;
+        int32 check_every_ms = 2;
+        float sims_factor = 3;
+        int32 sims_threshold = 4;
+    };
+    EarlyStopConfig early_stop = 91;
+
+    message UnstableOvertimeConfig {
+        bool enable = 1;
+        float time_factor = 2;
+    };
+    UnstableOvertimeConfig unstable_overtime = 92;
+
+    message BehindOvertimeConfig {
+        bool enable = 1;
+        float act_threshold = 2;
+        float time_factor = 3;
+    };
+    BehindOvertimeConfig behind_overtime = 93;
+
+    message TimeControlConfig {
+        bool enable = 1;
+        float main_time = 2;
+        float byo_yomi_time = 3;
+        int32 c_denom = 4;
+        int32 c_maxply = 5;
+        float reserved_time = 6;
+        float min_time = 7;
+        int32 byo_yomi_after = 8;
+    };
+    TimeControlConfig time_control = 94;
+}

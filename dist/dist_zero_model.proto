@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+import "model/model_config.proto";
+
+message ModelOutput {
+    repeated float policy = 1;
+    float value = 2;
+}
+
+message InitReq { ModelConfig model_config = 1; }
+message InitResp  {}
+
+message GetGlobalStepReq {}
+message GetGlobalStepResp  { int32 global_step = 1; }
+
+message ForwardReq { repeated bytes inputs = 1; }
+message ForwardResp  { repeated ModelOutput outputs = 1; }
+
+service DistZeroModel {
+    rpc Init (InitReq) returns (InitResp) {}
+    rpc GetGlobalStep (GetGlobalStepReq) returns (GetGlobalStepResp) {}
+    rpc Forward (ForwardReq) returns (ForwardResp) {}
+}
