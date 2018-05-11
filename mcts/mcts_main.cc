@@ -266,7 +266,7 @@ void GTPServing(std::istream &in, std::ostream &out)
         google::FlushLogFiles(google::INFO);
 
         std::istringstream ss(cmd);
-        if ((has_id = (ss >> id))) {
+        if ((has_id = (bool)(ss >> id))) {
             std::getline(ss, cmd);
         }
 
