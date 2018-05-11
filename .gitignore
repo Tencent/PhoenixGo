@@ -1,5 +1,6 @@
 log
 conf
+ckpt
 bazel-*
 compile_commands.json
 tools/actions
