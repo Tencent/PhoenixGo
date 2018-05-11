@@ -1,6 +1,6 @@
 ![PhoenixGo](images/logo.jpg?raw=true)
 
-**PhoenixGo** is an Go AI program which implement the Alpha Go Zero paper
+**PhoenixGo** is an Go AI program which implement the AlphaGo Zero paper
 "[Mastering the game of Go without human knowledge](https://deepmind.com/documents/119/agz_unformatted_nature.pdf)".
 It is also known as "BensonDarr" in FoxGo, "cronus" in CGOS,
 and the champion of "World AI Go Tournament 2018" held in Fuzhou China.
@@ -55,8 +55,8 @@ Dependices such as Tensorflow will be downloaded automatically. The building pro
 Download and extract the trained network:
 
 ```
-wget {trained-network-url}
-tar xvzf {trained-network-tarball}
+wget https://github.com/Tencent/PhoenixGo/releases/download/trained-network-20b-v1/trained-network-20b-v1.tar.gz
+tar xvzf trained-network-20b-v1.tar.gz
 ```
 
 Run in gtp mode with a config file (depend on the number of GPUs and using TensorRT or not):
