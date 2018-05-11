@@ -1,0 +1,11 @@
+dist: trusty
+
+before_install:
+    - wget https://github.com/bazelbuild/bazel/releases/download/0.11.1/bazel-0.11.1-installer-linux-x86_64.sh
+    - chmod +x bazel-0.11.1-installer-linux-x86_64.sh
+    - ./bazel-0.11.1-installer-linux-x86_64.sh --user
+    - export PATH="$PATH:$HOME/bin"
+
+script:
+    - bazel build //mcts:mcts_main
+    - bazel build //dist:dist_zero_model_server
