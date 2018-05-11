@@ -1,18 +1,18 @@
-![Phoenix Go](images/logo.jpg?raw=true)
+![PhoenixGo](images/logo.jpg?raw=true)
 
-**Phoenix Go** is an Go AI program which implement the Alpha Go Zero paper
+**PhoenixGo** is an Go AI program which implement the Alpha Go Zero paper
 "[Mastering the game of Go without human knowledge](https://deepmind.com/documents/119/agz_unformatted_nature.pdf)".
 It is also known as "BensonDarr" in FoxGo, "cronus" in CGOS,
 and the champion of "World AI Go Tournament 2018" held in Fuzhou China.
 
-If you use Phoenix Go in your project, please consider mentioning in your README.
+If you use PhoenixGo in your project, please consider mentioning in your README.
 
-If you use Phoenix Go in your research, please consider citing the library as follows:
+If you use PhoenixGo in your research, please consider citing the library as follows:
 
 ```
 @misc{PhoenixGo2018,
   author = {Qinsong Zeng and Jianchang Zhang and Zhanpeng Zeng and Yongsheng Li and Ming Chen}
-  title = {Phoenix Go},
+  title = {PhoenixGo},
   year = {2018},
   journal = {GitHub repository},
   howpublished = {\url{https://github.com/Tencent/PhoenixGo}}
@@ -75,7 +75,7 @@ You could modify your config file following [#configure-guide](#configure-guide)
 
 #### Distribute mode
 
-Phoenix Go support running with distributed workers, if there are GPUs on different machine.
+PhoenixGo support running with distributed workers, if there are GPUs on different machine.
 
 Build the distribute worker:
 

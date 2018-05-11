@@ -1,5 +1,5 @@
 /*
- * Tencent is pleased to support the open source community by making Phoenix Go available.
+ * Tencent is pleased to support the open source community by making PhoenixGo available.
  * 
  * Copyright (C) 2018 THL A29 Limited, a Tencent company. All rights reserved.
  * 

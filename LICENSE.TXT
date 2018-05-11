@@ -1,7 +1,7 @@
-Tencent is pleased to support the open source community by making Phoenix Go available.  
+Tencent is pleased to support the open source community by making PhoenixGo available.  
 Copyright (C) 2018 THL A29 Limited, a Tencent company.  All rights reserved.
-If you have downloaded a copy of the Phoenix Go binary from Tencent, please note that the Phoenix Go binary is licensed under the BSD 3-Clause License.
-If you have downloaded a copy of the Phoenix Go source code from Tencent, please note that Phoenix Go source code is licensed under the BSD 3-Clause License, except for the third-party components listed below which are subject to different license terms.  Your integration of Phoenix Go into your own projects may require compliance with the BSD 3-Clause License, as well as the other licenses applicable to the third-party components included within Phoenix Go.
+If you have downloaded a copy of the PhoenixGo binary from Tencent, please note that the PhoenixGo binary is licensed under the BSD 3-Clause License.
+If you have downloaded a copy of the PhoenixGo source code from Tencent, please note that PhoenixGo source code is licensed under the BSD 3-Clause License, except for the third-party components listed below which are subject to different license terms.  Your integration of PhoenixGo into your own projects may require compliance with the BSD 3-Clause License, as well as the other licenses applicable to the third-party components included within PhoenixGo.
 A copy of the BSD 3-Clause License is included in this file.
 
 Other dependencies and licenses:
