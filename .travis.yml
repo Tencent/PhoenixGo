@@ -1,4 +1,5 @@
 dist: trusty
+sudo: required
 
 before_install:
     - wget https://github.com/bazelbuild/bazel/releases/download/0.11.1/bazel-0.11.1-installer-linux-x86_64.sh
