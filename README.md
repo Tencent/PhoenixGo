@@ -11,7 +11,7 @@ If you use PhoenixGo in your research, please consider citing the library as fol
 
 ```
 @misc{PhoenixGo2018,
-  author = {Qinsong Zeng and Jianchang Zhang and Zhanpeng Zeng and Yongsheng Li and Ming Chen}
+  author = {Qinsong Zeng and Jianchang Zhang and Zhanpeng Zeng and Yongsheng Li and Ming Chen and Sifan Liu}
   title = {PhoenixGo},
   year = {2018},
   journal = {GitHub repository},
@@ -86,7 +86,7 @@ bazel build //dist:dist_zero_model_server
 Run `dist_zero_model_server` on distributed worker, **one for each GPU**.
 
 ```
-CUDA_VISIBLE_DEVICES={gpu} bazel-bin/dist/dist_zero_model_server --server_address "0.0.0.0:{port}" --logtostderr
+CUDA_VISIBLE_DEVICES={gpu} bazel-bin/dist/dist_zero_model_server --server_address="0.0.0.0:{port}" --logtostderr
 ```
 
 Fill `ip:port` of workers in the config file (`etc/mcts_dist.conf` is an example config for 32 workers),
