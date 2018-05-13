@@ -86,7 +86,7 @@ bazel build //dist:dist_zero_model_server
 Run `dist_zero_model_server` on distributed worker, **one for each GPU**.
 
 ```
-CUDA_VISIBLE_DEVICES={gpu} bazel-bin/dist/dist_zero_model_server --server_address"0.0.0.0:{port}" --logtostderr
+CUDA_VISIBLE_DEVICES={gpu} bazel-bin/dist/dist_zero_model_server --server_address "0.0.0.0:{port}" --logtostderr
 ```
 
 Fill `ip:port` of workers in the config file (`etc/mcts_dist.conf` is an example config for 32 workers),
