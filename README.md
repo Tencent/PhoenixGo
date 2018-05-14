@@ -35,9 +35,9 @@ If you use PhoenixGo in your research, please consider citing the library as fol
 Clone the repository and configure the building:
 
 ```
-git clone https://github.com/Tencent/PhoenixGo.git
-cd PhoenixGo
-./configure
+$ git clone https://github.com/Tencent/PhoenixGo.git
+$ cd PhoenixGo
+$ ./configure
 ```
 
 `./configure` will ask where CUDA and TensorRT have been installed, specify them if need.
@@ -45,7 +45,7 @@ cd PhoenixGo
 Then build with bazel:
 
 ```
-bazel build //mcts:mcts_main
+$ bazel build //mcts:mcts_main
 ```
 
 Dependices such as Tensorflow will be downloaded automatically. The building prosess may take a long time.
@@ -55,14 +55,14 @@ Dependices such as Tensorflow will be downloaded automatically. The building pro
 Download and extract the trained network:
 
 ```
-wget https://github.com/Tencent/PhoenixGo/releases/download/trained-network-20b-v1/trained-network-20b-v1.tar.gz
-tar xvzf trained-network-20b-v1.tar.gz
+$ wget https://github.com/Tencent/PhoenixGo/releases/download/trained-network-20b-v1/trained-network-20b-v1.tar.gz
+$ tar xvzf trained-network-20b-v1.tar.gz
 ```
 
 Run in gtp mode with a config file (depend on the number of GPUs and using TensorRT or not):
 
 ```
-bazel-bin/mcts/mcts_main --config_path=etc/{config} --gtp --logtostderr --v=1
+$ bazel-bin/mcts/mcts_main --config_path=etc/{config} --gtp --logtostderr --v=1
 ```
 
 The engine supports the GTP protocol, means it could be used with a GUI with GTP capability,
@@ -80,21 +80,39 @@ PhoenixGo support running with distributed workers, if there are GPUs on differe
 Build the distribute worker:
 
 ```
-bazel build //dist:dist_zero_model_server
+$ bazel build //dist:dist_zero_model_server
 ```
 
 Run `dist_zero_model_server` on distributed worker, **one for each GPU**.
 
 ```
-CUDA_VISIBLE_DEVICES={gpu} bazel-bin/dist/dist_zero_model_server --server_address="0.0.0.0:{port}" --logtostderr
+$ CUDA_VISIBLE_DEVICES={gpu} bazel-bin/dist/dist_zero_model_server --server_address="0.0.0.0:{port}" --logtostderr
 ```
 
 Fill `ip:port` of workers in the config file (`etc/mcts_dist.conf` is an example config for 32 workers),
 and run the distributed master:
 
 ```
-bazel-bin/mcts/mcts_main --config_path=etc/{config} --gtp --logtostderr --v=1
+$ bazel-bin/mcts/mcts_main --config_path=etc/{config} --gtp --logtostderr --v=1
 ```
+
+### On macOS
+
+**Note: Tensorflow stop providing GPU support on macOS since 1.2.0, so you are only able to run on CPU in macOS.**
+
+#### Requirements & Building
+
+Same as Linux.
+
+#### Running
+
+Add `libtensorflow_framework.so` to `LD_LIBRARY_PATH` first:
+
+```
+$ export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:{project_root}/bazel-bin/external/org_tensorflow/tensorflow"
+```
+
+Rest steps should be same as Linux.
 
 ### On Windows
 
