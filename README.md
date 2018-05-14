@@ -187,9 +187,7 @@ Glog options are also supported:
 
 Print in the log, something like:
 
-```
-I0514 12:51:32.724236 14467 mcts_engine.cc:157] 1th move(b): dp, `**`winrate=44.110905%`**`, N=654, Q=-0.117782, p=0.079232, v=-0.116534, cost 39042.679688ms, sims=7132, height=11, avg_height=5.782244, global_step=639200
-```
+`I0514 12:51:32.724236 14467 mcts_engine.cc:157] 1th move(b): dp, `**`winrate=44.110905%`**`, N=654, Q=-0.117782, p=0.079232, v=-0.116534, cost 39042.679688ms, sims=7132, height=11, avg_height=5.782244, global_step=639200`
 
 ### There are too much log
 
