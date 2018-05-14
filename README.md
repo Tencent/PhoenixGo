@@ -180,3 +180,43 @@ Glog options are also supported:
 * `--v`: verbose log, `--v=1` for turning on some debug log, `--v=0` to turning off
 
 `mcts_main --help` for more command line options.
+
+## FAQ
+
+### Where is the win rate?
+
+Print in the log, something like:
+
+```
+I0514 12:51:32.724236 14467 mcts_engine.cc:157] 1th move(b): dp, `**`winrate=44.110905%`**`, N=654, Q=-0.117782, p=0.079232, v=-0.116534, cost 39042.679688ms, sims=7132, height=11, avg_height=5.782244, global_step=639200
+```
+
+### There are too much log
+
+Passing `--v=0` to `mcts_main` will turn off many debug log.
+Moreover, `--minloglevel=1` and `--minloglevel=2` could disable INFO log and WARNING log.
+
+Or, if you just don't want to log to stderr, replace `--logtostderr` to `--log_dir={log_dir}`,
+then you could read your log from `{log_dir}/mcts_main.INFO`.
+
+### I want to run constant time/simulations per move
+
+Modify your config file. `early_stop`, `unstable_overtime`, `behind_overtime` and
+`time_control` are options that affect the search time, remove them if exist then
+each move will cost constant time/simulations.
+
+### GTP command `time_settings` is unusable
+
+Add these lines in your config:
+
+```
+time_control {
+    enable: 1
+    c_denom: 20
+    c_maxply: 40
+    reserved_time: 1.0
+}
+```
+
+`c_denom` and `c_maxply` are parameters for deciding how to use the "main time".
+`reserved_time` is how many seconds should reserved (for network latency) in "byo-yomi time".
