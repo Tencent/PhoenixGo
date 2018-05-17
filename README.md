@@ -98,7 +98,7 @@ $ bazel-bin/mcts/mcts_main --config_path=etc/{config} --gtp --logtostderr --v=1
 
 ### On macOS
 
-**Note: Tensorflow stop providing GPU support on macOS since 1.2.0, so you are only able to run on CPU in macOS.**
+**Note: Tensorflow stop providing GPU support on macOS since 1.2.0, so you are only able to run on CPU.**
 
 #### Requirements & Building
 
@@ -183,7 +183,7 @@ Glog options are also supported:
 
 ## FAQ
 
-### Where is the win rate?
+**Where is the win rate?**
 
 Print in the log, something like:
 
@@ -191,7 +191,7 @@ Print in the log, something like:
 I0514 12:51:32.724236 14467 mcts_engine.cc:157] 1th move(b): dp, <b>winrate=44.110905%</b>, N=654, Q=-0.117782, p=0.079232, v=-0.116534, cost 39042.679688ms, sims=7132, height=11, avg_height=5.782244, global_step=639200
 </pre>
 
-### There are too much log
+**There are too much log**
 
 Passing `--v=0` to `mcts_main` will turn off many debug log.
 Moreover, `--minloglevel=1` and `--minloglevel=2` could disable INFO log and WARNING log.
@@ -199,13 +199,17 @@ Moreover, `--minloglevel=1` and `--minloglevel=2` could disable INFO log and WAR
 Or, if you just don't want to log to stderr, replace `--logtostderr` to `--log_dir={log_dir}`,
 then you could read your log from `{log_dir}/mcts_main.INFO`.
 
-### I want to run constant time/simulations per move
+**How to run with Sabaki**
+
+Setting GTP engine in Sabaki's menu: `Engines -> Manage Engines`. See also [#22](https://github.com/Tencent/PhoenixGo/issues/22).
+
+**I want to run constant time/simulations per move**
 
 Modify your config file. `early_stop`, `unstable_overtime`, `behind_overtime` and
 `time_control` are options that affect the search time, remove them if exist then
 each move will cost constant time/simulations.
 
-### GTP command `time_settings` is unusable
+**GTP command `time_settings` doesn't work**
 
 Add these lines in your config:
 
