@@ -114,6 +114,14 @@ $ export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:{project_root}/bazel-bin/external/org
 
 Rest steps should be same as Linux.
 
+#### Work With Sabaki
+Download and extract the engine:
+```
+$ wget https://github.com/Tencent/PhoenixGo/releases/download/mac-x64-cpuonly-v1/PhoenixGo-mac-x64-cpuonly-v1.tgz
+$ tar xvzf PhoenixGo-mac-x64-cpuonly-v1.tgz
+```
+Follow the document : using_phoenixgo_on_mac.pdf
+
 ### On Windows
 
 Work in progress.
