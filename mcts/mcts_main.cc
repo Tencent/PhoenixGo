@@ -140,8 +140,11 @@ std::pair<bool, std::string> GTPExecute(MCTSEngine &engine, const std::string &c
     if (op == "version") {
         return {true, "1.0"};
     }
+    if (op == "protocol_version") {
+        return {true, "2"};
+    }
     if (op == "list_commands") {
-        return {true, "name\nversion\nlist_commands\nquit\nclear_board\nboardsize\nkomi\ntime_settings\ntime_left\nplace_free_handicap\nset_free_handicap\nplay\ngenmove\nfinal_score\nget_debug_info\nget_last_move_debug_info"};
+        return {true, "name\nversion\nprotocol_version\nlist_commands\nquit\nclear_board\nboardsize\nkomi\ntime_settings\ntime_left\nplace_free_handicap\nset_free_handicap\nplay\ngenmove\nfinal_score\nget_debug_info\nget_last_move_debug_info"};
     }
     if (op == "quit") {
         return {true, ""};
