@@ -224,6 +224,7 @@ std::pair<bool, std::string> GTPExecute(MCTSEngine &engine, const std::string &c
             engine.Move(-1, -1);
         }
         engine.Move(x, y);
+        fprintf(stderr, "%s\n", engine.GetDebugger().GetLastMoveDebugStr().c_str());
         return {true, ""};
     }
     if (op == "genmove") {
@@ -236,6 +237,7 @@ std::pair<bool, std::string> GTPExecute(MCTSEngine &engine, const std::string &c
         GoCoordId x = -1, y = -1;
         engine.GenMove(x, y);
         engine.Move(x, y);
+        fprintf(stderr, "%s\n", engine.GetDebugger().GetLastMoveDebugStr().c_str());
         return {true, EncodeMove(x, y)};
     }
     if (op == "final_score") {
