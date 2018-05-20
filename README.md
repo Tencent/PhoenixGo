@@ -60,12 +60,12 @@ $ tar xvzf trained-network-20b-v1.tar.gz
 $ scripts/start.sh
 ```
 
-`start.sh` will detect number of GPUs and run `mcts_main` with proper config file, and write log files in directory `log`.
-You could also use a customized config by running `scripts/start.sh ${config_path}`.
+`start.sh` will detect the number of GPUs, run `mcts_main` with proper config file, and write log files in directory `log`.
+You could also use a customized config by running `scripts/start.sh {config_path}`.
 See also [#configure-guide](#configure-guide).
 
 Furthermore, if you want to fully control all the options of `mcts_main` (such as, changing log destination),
-you could also run `bazel-bin/mcts/mcts_main` directly. See also [#command-line-options](#command-line-options)
+you could also run `bazel-bin/mcts/mcts_main` directly. See also [#command-line-options](#command-line-options).
 
 The engine supports the GTP protocol, means it could be used with a GUI with GTP capability,
 such as [Sabaki](http://sabaki.yichuanshen.de).
@@ -176,7 +176,7 @@ Glog options are also supported:
 
 ## FAQ
 
-**1. Where is the win rate**
+**1. Where is the win rate?**
 
 Print in the log, something like:
 
@@ -184,7 +184,7 @@ Print in the log, something like:
 I0514 12:51:32.724236 14467 mcts_engine.cc:157] 1th move(b): dp, <b>winrate=44.110905%</b>, N=654, Q=-0.117782, p=0.079232, v=-0.116534, cost 39042.679688ms, sims=7132, height=11, avg_height=5.782244, global_step=639200
 </pre>
 
-**2. There are too much log**
+**2. There are too much log.**
 
 Passing `--v=0` to `mcts_main` will turn off many debug log.
 Moreover, `--minloglevel=1` and `--minloglevel=2` could disable INFO log and WARNING log.
@@ -192,23 +192,23 @@ Moreover, `--minloglevel=1` and `--minloglevel=2` could disable INFO log and WAR
 Or, if you just don't want to log to stderr, replace `--logtostderr` to `--log_dir={log_dir}`,
 then you could read your log from `{log_dir}/mcts_main.INFO`.
 
-**3. How to run with Sabaki**
+**3. How to run with Sabaki?**
 
-Setting GTP engine in Sabaki's menu: `Engines -> Manage Engines`, fill "Path" with path of `start.sh`.
+Setting GTP engine in Sabaki's menu: `Engines -> Manage Engines`, fill `Path` with path of `start.sh`.
 Click `Engines -> Attach` to use the engine in your game.
 See also [#22](https://github.com/Tencent/PhoenixGo/issues/22).
 
-**4. How make PhoenixGo think with longer/shorter time**
+**4. How make PhoenixGo think with longer/shorter time?**
 
 Modify `timeout_ms_per_step` in your config file.
 
-**5. How make PhoenixGo think with constant time per move**
+**5. How make PhoenixGo think with constant time per move?**
 
 Modify your config file. `early_stop`, `unstable_overtime`, `behind_overtime` and
 `time_control` are options that affect the search time, remove them if exist then
 each move will cost constant time/simulations.
 
-**6. GTP command `time_settings` doesn't work**
+**6. GTP command `time_settings` doesn't work.**
 
 Add these lines in your config:
 
