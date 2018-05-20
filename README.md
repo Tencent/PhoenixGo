@@ -52,26 +52,23 @@ Dependices such as Tensorflow will be downloaded automatically. The building pro
 
 #### Running
 
-Download and extract the trained network:
+Download and extract the trained network, then run:
 
 ```
 $ wget https://github.com/Tencent/PhoenixGo/releases/download/trained-network-20b-v1/trained-network-20b-v1.tar.gz
 $ tar xvzf trained-network-20b-v1.tar.gz
+$ scripts/start.sh
 ```
 
-Run in gtp mode with a config file (depend on the number of GPUs and using TensorRT or not):
+`start.sh` will detect number of GPUs and run `mcts_main` with proper config file, and write log files in directory `log`.
+You could also use a customized config by running `scripts/start.sh ${config_path}`.
+See also [#configure-guide](#configure-guide).
 
-```
-$ bazel-bin/mcts/mcts_main --config_path=etc/{config} --gtp --logtostderr --v=1
-```
+Furthermore, if you want to fully control all the options of `mcts_main` (such as, changing log destination),
+you could also run `bazel-bin/mcts/mcts_main` directly. See also [#command-line-options](#command-line-options)
 
 The engine supports the GTP protocol, means it could be used with a GUI with GTP capability,
 such as [Sabaki](http://sabaki.yichuanshen.de).
-
-`--logtostderr` let `mcts_main` log messages to stderr, if you want to log to files,
-change `--logtostderr` to `--log_dir={log_dir}`
-
-You could modify your config file following [#configure-guide](#configure-guide).
 
 #### Distribute mode
 
@@ -93,34 +90,22 @@ Fill `ip:port` of workers in the config file (`etc/mcts_dist.conf` is an example
 and run the distributed master:
 
 ```
-$ bazel-bin/mcts/mcts_main --config_path=etc/{config} --gtp --logtostderr --v=1
+$ scripts/start.sh etc/mcts_dist.conf
 ```
 
 ### On macOS
 
 **Note: Tensorflow stop providing GPU support on macOS since 1.2.0, so you are only able to run on CPU.**
 
-#### Requirements & Building
+#### Use Pre-built Binary
+
+Download and extract https://github.com/Tencent/PhoenixGo/releases/download/mac-x64-cpuonly-v1/PhoenixGo-mac-x64-cpuonly-v1.tgz
+
+Follow the document: using_phoenixgo_on_mac.pdf
+
+#### Building from Source
 
 Same as Linux.
-
-#### Running
-
-Add `libtensorflow_framework.so` to `LD_LIBRARY_PATH` first:
-
-```
-$ export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:{project_root}/bazel-bin/external/org_tensorflow/tensorflow"
-```
-
-Rest steps should be same as Linux.
-
-#### Work With Sabaki
-Download and extract the engine:
-```
-$ wget https://github.com/Tencent/PhoenixGo/releases/download/mac-x64-cpuonly-v1/PhoenixGo-mac-x64-cpuonly-v1.tgz
-$ tar xvzf PhoenixGo-mac-x64-cpuonly-v1.tgz
-```
-Follow the document : using_phoenixgo_on_mac.pdf
 
 ### On Windows
 
@@ -191,7 +176,7 @@ Glog options are also supported:
 
 ## FAQ
 
-**Where is the win rate?**
+**1. Where is the win rate**
 
 Print in the log, something like:
 
@@ -199,7 +184,7 @@ Print in the log, something like:
 I0514 12:51:32.724236 14467 mcts_engine.cc:157] 1th move(b): dp, <b>winrate=44.110905%</b>, N=654, Q=-0.117782, p=0.079232, v=-0.116534, cost 39042.679688ms, sims=7132, height=11, avg_height=5.782244, global_step=639200
 </pre>
 
-**There are too much log**
+**2. There are too much log**
 
 Passing `--v=0` to `mcts_main` will turn off many debug log.
 Moreover, `--minloglevel=1` and `--minloglevel=2` could disable INFO log and WARNING log.
@@ -207,17 +192,23 @@ Moreover, `--minloglevel=1` and `--minloglevel=2` could disable INFO log and WAR
 Or, if you just don't want to log to stderr, replace `--logtostderr` to `--log_dir={log_dir}`,
 then you could read your log from `{log_dir}/mcts_main.INFO`.
 
-**How to run with Sabaki**
+**3. How to run with Sabaki**
 
-Setting GTP engine in Sabaki's menu: `Engines -> Manage Engines`. See also [#22](https://github.com/Tencent/PhoenixGo/issues/22).
+Setting GTP engine in Sabaki's menu: `Engines -> Manage Engines`, fill "Path" with path of `start.sh`.
+Click `Engines -> Attach` to use the engine in your game.
+See also [#22](https://github.com/Tencent/PhoenixGo/issues/22).
 
-**I want to run constant time/simulations per move**
+**4. How make PhoenixGo think with longer/shorter time**
+
+Modify `timeout_ms_per_step` in your config file.
+
+**5. How make PhoenixGo think with constant time per move**
 
 Modify your config file. `early_stop`, `unstable_overtime`, `behind_overtime` and
 `time_control` are options that affect the search time, remove them if exist then
 each move will cost constant time/simulations.
 
-**GTP command `time_settings` doesn't work**
+**6. GTP command `time_settings` doesn't work**
 
 Add these lines in your config:
 
