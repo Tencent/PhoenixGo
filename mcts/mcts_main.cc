@@ -159,6 +159,7 @@ std::pair<bool, std::string> GTPExecute(MCTSEngine &engine, const std::string &c
         if (size != 19) {
             return {false, "unacceptable size"};
         }
+        engine.Reset();
         return {true, ""};
     }
     if (op == "komi") {
