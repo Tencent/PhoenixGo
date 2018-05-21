@@ -99,6 +99,17 @@
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(CUDA_PATH);$(tensorflow_BuildPath);$(glog_BuildPath)\$(Configuration);$(gflags_BuildPath)\lib\$(Configuration);$(boost_LibPath);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>png\install\lib\libpng12_static.lib;sqlite\install\lib\sqlite.lib;zlib\install\lib\zlibstatic.lib;gif\install\lib\giflib.lib;jpeg\install\lib\libjpeg.lib;lmdb\install\lib\lmdb.lib;farmhash\install\lib\farmhash.lib;fft2d\\src\lib\fft2d.lib;highwayhash\install\lib\highwayhash.lib;nsync\install\lib\nsync.lib;jsoncpp\src\jsoncpp\src\lib_json\$(Configuration)\jsoncpp.lib;re2\src\re2\$(Configuration)\re2.lib;protobuf\src\protobuf\$(Configuration)\libprotobuf.lib;grpc\src\grpc\$(Configuration)\gpr.lib;grpc\src\grpc\$(Configuration)\grpc_unsecure.lib;grpc\src\grpc\$(Configuration)\grpc++_unsecure.lib;snappy\src\snappy\$(Configuration)\snappy.lib;tf_cc_while_loop.dir\$(Configuration)\tf_cc_while_loop.lib;tf_stream_executor.dir\$(Configuration)\tf_stream_executor.lib;$(Configuration)\tf_protos_cc.lib;$(Configuration)\tf_core_gpu_kernels.lib;glog.lib;gflags_static.lib;lib\$(Platform)\cudart_static.lib;lib\$(Platform)\cuda.lib;lib\$(Platform)\cublas.lib;lib\$(Platform)\cublas_device.lib;lib\$(Platform)\cufft.lib;lib\$(Platform)\curand.lib;extras\CUPTI\lib$(Platform)\cupti.lib;lib\$(Platform)\cusolver.lib;lib\$(Platform)\cudnn.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/WHOLEARCHIVE:tf_core_lib.dir\$(Configuration)\tf_core_lib.lib
+/WHOLEARCHIVE:tf_core_cpu.dir\$(Configuration)\tf_core_cpu.lib
+/WHOLEARCHIVE:tf_core_framework.dir\$(Configuration)\tf_core_framework.lib
+/WHOLEARCHIVE:tf_core_kernels.dir\$(Configuration)\tf_core_kernels.lib
+/WHOLEARCHIVE:tf_cc_framework.dir\$(Configuration)\tf_cc_framework.lib
+/WHOLEARCHIVE:tf_cc.dir\$(Configuration)\tf_cc_ops.lib 
+/WHOLEARCHIVE:tf_core_direct_session.dir\$(Configuration)\tf_core_direct_session.lib 
+/WHOLEARCHIVE:tf_core_ops.dir\$(Configuration)\tf_core_ops.lib   
+/WHOLEARCHIVE:tf_stream_executor.dir\$(Configuration)\tf_stream_executor.lib
+/WHOLEARCHIVE:tf_cc.dir\$(Configuration)\tf_cc.lib 
+/WHOLEARCHIVE:tf_cc_ops.dir\$(Configuration)\tf_cc_ops.lib %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -117,6 +128,17 @@
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(CUDA_PATH);$(tensorflow_BuildPath);$(glog_BuildPath)\$(Configuration);$(gflags_BuildPath)\lib\$(Configuration);$(boost_LibPath);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>png\install\lib\libpng12_static.lib;sqlite\install\lib\sqlite.lib;zlib\install\lib\zlibstatic.lib;gif\install\lib\giflib.lib;jpeg\install\lib\libjpeg.lib;lmdb\install\lib\lmdb.lib;farmhash\install\lib\farmhash.lib;fft2d\\src\lib\fft2d.lib;highwayhash\install\lib\highwayhash.lib;nsync\install\lib\nsync.lib;jsoncpp\src\jsoncpp\src\lib_json\$(Configuration)\jsoncpp.lib;re2\src\re2\$(Configuration)\re2.lib;protobuf\src\protobuf\$(Configuration)\libprotobuf.lib;grpc\src\grpc\$(Configuration)\gpr.lib;grpc\src\grpc\$(Configuration)\grpc_unsecure.lib;grpc\src\grpc\$(Configuration)\grpc++_unsecure.lib;snappy\src\snappy\$(Configuration)\snappy.lib;tf_cc_while_loop.dir\$(Configuration)\tf_cc_while_loop.lib;tf_stream_executor.dir\$(Configuration)\tf_stream_executor.lib;$(Configuration)\tf_protos_cc.lib;$(Configuration)\tf_core_gpu_kernels.lib;glog.lib;gflags_static.lib;lib\$(Platform)\cudart_static.lib;lib\$(Platform)\cuda.lib;lib\$(Platform)\cublas.lib;lib\$(Platform)\cublas_device.lib;lib\$(Platform)\cufft.lib;lib\$(Platform)\curand.lib;extras\CUPTI\lib$(Platform)\cupti.lib;lib\$(Platform)\cusolver.lib;lib\$(Platform)\cudnn.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/WHOLEARCHIVE:tf_core_lib.dir\$(Configuration)\tf_core_lib.lib
+/WHOLEARCHIVE:tf_core_cpu.dir\$(Configuration)\tf_core_cpu.lib
+/WHOLEARCHIVE:tf_core_framework.dir\$(Configuration)\tf_core_framework.lib
+/WHOLEARCHIVE:tf_core_kernels.dir\$(Configuration)\tf_core_kernels.lib
+/WHOLEARCHIVE:tf_cc_framework.dir\$(Configuration)\tf_cc_framework.lib
+/WHOLEARCHIVE:tf_cc.dir\$(Configuration)\tf_cc_ops.lib 
+/WHOLEARCHIVE:tf_core_direct_session.dir\$(Configuration)\tf_core_direct_session.lib 
+/WHOLEARCHIVE:tf_core_ops.dir\$(Configuration)\tf_core_ops.lib   
+/WHOLEARCHIVE:tf_stream_executor.dir\$(Configuration)\tf_stream_executor.lib
+/WHOLEARCHIVE:tf_cc.dir\$(Configuration)\tf_cc.lib 
+/WHOLEARCHIVE:tf_cc_ops.dir\$(Configuration)\tf_cc_ops.lib %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -157,6 +179,17 @@
     <Link>
       <AdditionalLibraryDirectories>$(CUDA_PATH);$(tensorflow_BuildPath);$(glog_BuildPath)\$(Configuration);$(gflags_BuildPath)\lib\$(Configuration);$(boost_LibPath);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>png\install\lib\libpng12_static.lib;sqlite\install\lib\sqlite.lib;zlib\install\lib\zlibstatic.lib;gif\install\lib\giflib.lib;jpeg\install\lib\libjpeg.lib;lmdb\install\lib\lmdb.lib;farmhash\install\lib\farmhash.lib;fft2d\\src\lib\fft2d.lib;highwayhash\install\lib\highwayhash.lib;nsync\install\lib\nsync.lib;jsoncpp\src\jsoncpp\src\lib_json\$(Configuration)\jsoncpp.lib;re2\src\re2\$(Configuration)\re2.lib;protobuf\src\protobuf\$(Configuration)\libprotobuf.lib;grpc\src\grpc\$(Configuration)\gpr.lib;grpc\src\grpc\$(Configuration)\grpc_unsecure.lib;grpc\src\grpc\$(Configuration)\grpc++_unsecure.lib;snappy\src\snappy\$(Configuration)\snappy.lib;tf_cc_while_loop.dir\$(Configuration)\tf_cc_while_loop.lib;tf_stream_executor.dir\$(Configuration)\tf_stream_executor.lib;$(Configuration)\tf_protos_cc.lib;$(Configuration)\tf_core_gpu_kernels.lib;glog.lib;gflags_static.lib;lib\$(Platform)\cudart_static.lib;lib\$(Platform)\cuda.lib;lib\$(Platform)\cublas.lib;lib\$(Platform)\cublas_device.lib;lib\$(Platform)\cufft.lib;lib\$(Platform)\curand.lib;extras\CUPTI\lib$(Platform)\cupti.lib;lib\$(Platform)\cusolver.lib;lib\$(Platform)\cudnn.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/WHOLEARCHIVE:tf_core_lib.dir\$(Configuration)\tf_core_lib.lib
+/WHOLEARCHIVE:tf_core_cpu.dir\$(Configuration)\tf_core_cpu.lib
+/WHOLEARCHIVE:tf_core_framework.dir\$(Configuration)\tf_core_framework.lib
+/WHOLEARCHIVE:tf_core_kernels.dir\$(Configuration)\tf_core_kernels.lib
+/WHOLEARCHIVE:tf_cc_framework.dir\$(Configuration)\tf_cc_framework.lib
+/WHOLEARCHIVE:tf_cc.dir\$(Configuration)\tf_cc_ops.lib 
+/WHOLEARCHIVE:tf_core_direct_session.dir\$(Configuration)\tf_core_direct_session.lib 
+/WHOLEARCHIVE:tf_core_ops.dir\$(Configuration)\tf_core_ops.lib   
+/WHOLEARCHIVE:tf_stream_executor.dir\$(Configuration)\tf_stream_executor.lib
+/WHOLEARCHIVE:tf_cc.dir\$(Configuration)\tf_cc.lib 
+/WHOLEARCHIVE:tf_cc_ops.dir\$(Configuration)\tf_cc_ops.lib %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
