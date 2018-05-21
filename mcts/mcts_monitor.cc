@@ -108,7 +108,7 @@ void MCTSMonitor::MonitorRoutine()
     m_monitor_thread_conductor.Wait();
     for (;;) {
         if (!m_monitor_thread_conductor.IsRunning()) {
-            m_monitor_thread_conductor.Yield();
+            m_monitor_thread_conductor.AckPause();
             m_monitor_thread_conductor.Wait();
             if (m_monitor_thread_conductor.IsTerminate()) {
                 LOG(WARNING) << "MonitorRoutine: terminate";
@@ -117,6 +117,6 @@ void MCTSMonitor::MonitorRoutine()
         }
         m_monitor_thread_conductor.Sleep(m_engine->GetConfig().monitor_log_every_ms() * 1000LL);
         Log();
-        google::FlushLogFiles(google::INFO);
+        google::FlushLogFiles(google::GLOG_INFO);
     }
 }

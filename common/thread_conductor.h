@@ -23,6 +23,7 @@
 
 #include "wait_group.h"
 
+
 class ThreadConductor
 {
  public:
@@ -32,7 +33,7 @@ class ThreadConductor
     void Pause();
     void Resume(int num_threads);
     void Wait();
-    void Yield();
+    void AckPause();
     bool Join(int64_t timeout_us = -1);
     void Sleep(int64_t duration_us);
     bool IsRunning();

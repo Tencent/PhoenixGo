@@ -17,6 +17,8 @@
  */
 #include "byo_yomi_timer.h"
 
+#include <algorithm>
+
 ByoYomiTimer::ByoYomiTimer()
     : m_enable(false),
       m_remain_time{0.0f, 0.0f},

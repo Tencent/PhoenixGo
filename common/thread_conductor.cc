@@ -58,7 +58,7 @@ void ThreadConductor::Wait()
     m_resume_wg.Done();
 }
 
-void ThreadConductor::Yield()
+void ThreadConductor::AckPause()
 {
     m_pause_wg.Done();
 }

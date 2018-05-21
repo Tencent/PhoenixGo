@@ -436,9 +436,9 @@ TreeNode *MCTSEngine::SelectChild(TreeNode *node)
     TreeNode *ch = node->ch;
     int ch_len = node->ch_len;
     CHECK_GT(ch_len, 0);
-    int visit_count[ch_len];
-    float virtual_loss[ch_len];
-    float total_action[ch_len];
+    int visit_count[GoComm::GOBOARD_SIZE + 1];
+    float virtual_loss[GoComm::GOBOARD_SIZE + 1];
+    float total_action[GoComm::GOBOARD_SIZE + 1];
     for (int i = 0; i < ch_len; ++i) {
         visit_count[i] = ch[i].visit_count;
         virtual_loss[i] = ch[i].virtual_loss_count * m_config.virtual_loss();
@@ -601,8 +601,8 @@ bool MCTSEngine::CheckUnstable()
     }
     TreeNode *ch = m_root->ch;
     int ch_len = m_root->ch_len;
-    int visit_count[ch_len];
-    float mean_action[ch_len];
+    int visit_count[GoComm::GOBOARD_SIZE + 1];
+    float mean_action[GoComm::GOBOARD_SIZE + 1];
     for (int i = 0; i < ch_len; ++i) {
         visit_count[i] = ch[i].visit_count;
         mean_action[i] = visit_count[i] == 0 ? 0.0f :
@@ -790,7 +790,7 @@ void MCTSEngine::SearchRoutine()
     for (;;) {
         if (!m_search_threads_conductor.IsRunning()) {
             VLOG(2) << "SearchRoutine pause";
-            m_search_threads_conductor.Yield();
+            m_search_threads_conductor.AckPause();
             m_search_threads_conductor.Wait();
             VLOG(2) << "SearchRoutine resume";
             if (m_search_threads_conductor.IsTerminate()) {
@@ -884,7 +884,7 @@ void MCTSEngine::InitRoot()
     if (m_config.enable_dirichlet_noise()) {
         TreeNode *ch = m_root->ch;
         int ch_len = m_root->ch_len;
-        float noise[ch_len];
+        float noise[GoComm::GOBOARD_SIZE + 1];
         std::gamma_distribution<float> gamma(m_config.dirichlet_noise_alpha());
         for (int i = 0; i < ch_len; ++i) {
             noise[i] = gamma(g_random_engine);
@@ -929,11 +929,11 @@ int MCTSEngine::GetBestMove(float &v_resign)
 {
     TreeNode *ch = m_root->ch;
     int ch_len = m_root->ch_len;
-    int visit_count[ch_len];
-    float total_action[ch_len];
-    float mean_action[ch_len];
-    float prior_prob[ch_len];
-    float value[ch_len];
+    int visit_count[GoComm::GOBOARD_SIZE + 1];
+    float total_action[GoComm::GOBOARD_SIZE + 1];
+    float mean_action[GoComm::GOBOARD_SIZE + 1];
+    float prior_prob[GoComm::GOBOARD_SIZE + 1];
+    float value[GoComm::GOBOARD_SIZE + 1];
     bool disable_pass = IsPassDisable();
     for (int i = 0; i < ch_len; ++i) {
         if (disable_pass && ch[i].move == GoComm::COORD_PASS) {
@@ -987,7 +987,7 @@ int MCTSEngine::GetSamplingMove(float temperature)
     TreeNode *ch = m_root->ch;
     int ch_len = m_root->ch_len;
     float rtemp = 1.0f / temperature;
-    float probs[ch_len];
+    float probs[GoComm::GOBOARD_SIZE + 1];
     bool disable_pass = IsPassDisable();
     for (int i = 0; i < ch_len; ++i) {
         if (disable_pass && ch[i].move == GoComm::COORD_PASS) {

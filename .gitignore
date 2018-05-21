@@ -9,3 +9,13 @@ third_party/bazel
 .bazelrc
 .tf_configure.bazelrc
 tools/python_bin_path.sh
+*.pb.h
+*.pb.cc
+*.user
+*.VC.db
+*.VC.VC.opendb
+.vs
+x64
+x86
+Release
+Debug

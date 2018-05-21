@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="model\checkpoint_utils.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="model\trt_zero_model.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="model\zero_model.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mcts\byo_yomi_timer.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mcts\mcts_config.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mcts\mcts_debugger.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mcts\mcts_engine.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mcts\mcts_main.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mcts\mcts_monitor.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dist\async_dist_zero_model_client.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dist\dist_zero_model_client.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dist\leaky_bucket.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="common\go_comm.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="common\go_state.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="common\str_utils.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="common\thread_conductor.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="common\timer.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="common\wait_group.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="model\checkpoint_state.pb.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="model\model_config.pb.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mcts\mcts_config.pb.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dist\dist_zero_model.grpc.pb.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dist\dist_zero_model.pb.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dist\dist_config.pb.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="model\checkpoint_utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="model\trt_zero_model.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="model\zero_model.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="model\zero_model_base.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mcts\byo_yomi_timer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mcts\mcts_config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mcts\mcts_debugger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mcts\mcts_engine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mcts\mcts_monitor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dist\async_dist_zero_model_client.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dist\async_rpc_queue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dist\dist_zero_model_client.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dist\leaky_bucket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="common\errordef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="common\go_comm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="common\go_state.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="common\str_utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="common\task_queue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="common\thread_conductor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="common\timer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="common\wait_group.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="model\checkpoint_state.pb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="model\model_config.pb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mcts\mcts_config.pb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dist\dist_zero_model.pb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dist\dist_zero_model.grpc.pb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dist\dist_config.pb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="model\checkpoint_state.proto" />
+    <CustomBuild Include="model\model_config.proto" />
+    <CustomBuild Include="dist\dist_config.proto" />
+    <CustomBuild Include="dist\dist_zero_model.proto" />
+    <CustomBuild Include="mcts\mcts_config.proto" />
+  </ItemGroup>
+</Project>

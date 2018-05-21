@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <tensorflow_SourcePath>C:\Users\jchzhang\tensorflow</tensorflow_SourcePath>
+    <tensorflow_BuildPath>C:\Users\jchzhang\tensorflow\tensorflow\contrib\cmake\build</tensorflow_BuildPath>
+    <glog_SourcePath>C:\Users\jchzhang\glog-0.3.5</glog_SourcePath>
+    <glog_BuildPath>C:\Users\jchzhang\glog-0.3.5</glog_BuildPath>
+    <gflags_SourcePath>C:\Users\jchzhang\gflags-2.2.1</gflags_SourcePath>
+    <gflags_BuildPath>C:\Users\jchzhang\gflags-2.2.1</gflags_BuildPath>
+    <boost_IncludePath>C:\Users\jchzhang\boost_1_66_0</boost_IncludePath>
+    <boost_LibPath>C:\Users\jchzhang\boost_1_66_0\stage\lib</boost_LibPath>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemDefinitionGroup />
+  <ItemGroup>
+    <BuildMacro Include="tensorflow_SourcePath">
+      <Value>$(tensorflow_SourcePath)</Value>
+    </BuildMacro>
+    <BuildMacro Include="tensorflow_BuildPath">
+      <Value>$(tensorflow_BuildPath)</Value>
+    </BuildMacro>
+    <BuildMacro Include="glog_SourcePath">
+      <Value>$(glog_SourcePath)</Value>
+    </BuildMacro>
+    <BuildMacro Include="glog_BuildPath">
+      <Value>$(glog_BuildPath)</Value>
+    </BuildMacro>
+    <BuildMacro Include="gflags_SourcePath">
+      <Value>$(gflags_SourcePath)</Value>
+    </BuildMacro>
+    <BuildMacro Include="gflags_BuildPath">
+      <Value>$(gflags_BuildPath)</Value>
+    </BuildMacro>
+    <BuildMacro Include="boost_IncludePath">
+      <Value>$(boost_IncludePath)</Value>
+    </BuildMacro>
+    <BuildMacro Include="boost_LibPath">
+      <Value>$(boost_LibPath)</Value>
+    </BuildMacro>
+  </ItemGroup>
+</Project>

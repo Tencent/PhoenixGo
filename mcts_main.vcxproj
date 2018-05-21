@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{ABF9E6C0-D295-4B39-B367-3B67DF2CA3E9}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectName>mcts_main</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="ThirdParty.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="ThirdParty.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="ThirdParty.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="ThirdParty.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>
+    </LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>
+    </LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Linkages-gflags>static</Linkages-gflags>
+    <Linkages-glog>static</Linkages-glog>
+    <LinkIncremental>
+    </LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>
+    </LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>_WIN32_WINNT=0x600;NOMINMAX;COMPILER_MSVC;GFLAGS_DLL_DECLARE_FLAG=;GFLAGS_DLL_DEFINE_FLAG=;GLOG_NO_ABBREVIATED_SEVERITIES;GOOGLE_GLOG_DLL_DECL=;GFLAGS_IS_A_DLL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(tensorflow_SourcePath);$(tensorflow_BuildPath);$(tensorflow_BuildPath)\nsync\install\include;$(tensorflow_BuildPath)\external\eigen_archive;$(tensorflow_SourcePath)\third_party\eigen3;$(tensorflow_BuildPath)\protobuf\src\protobuf\src;$(tensorflow_BuildPath)\grpc\src\grpc\include;$(glog_BuildPath);$(glog_SourcePath)\src;$(gflags_BuildPath)\include;$(boost_IncludePath);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <TargetMachine>MachineX86</TargetMachine>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>$(CUDA_PATH);$(tensorflow_BuildPath);$(glog_BuildPath)\$(Configuration);$(gflags_BuildPath)\lib\$(Configuration);$(boost_LibPath);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>png\install\lib\libpng12_static.lib;sqlite\install\lib\sqlite.lib;zlib\install\lib\zlibstatic.lib;gif\install\lib\giflib.lib;jpeg\install\lib\libjpeg.lib;lmdb\install\lib\lmdb.lib;farmhash\install\lib\farmhash.lib;fft2d\\src\lib\fft2d.lib;highwayhash\install\lib\highwayhash.lib;nsync\install\lib\nsync.lib;jsoncpp\src\jsoncpp\src\lib_json\$(Configuration)\jsoncpp.lib;re2\src\re2\$(Configuration)\re2.lib;protobuf\src\protobuf\$(Configuration)\libprotobuf.lib;grpc\src\grpc\$(Configuration)\gpr.lib;grpc\src\grpc\$(Configuration)\grpc_unsecure.lib;grpc\src\grpc\$(Configuration)\grpc++_unsecure.lib;snappy\src\snappy\$(Configuration)\snappy.lib;tf_cc_while_loop.dir\$(Configuration)\tf_cc_while_loop.lib;tf_stream_executor.dir\$(Configuration)\tf_stream_executor.lib;$(Configuration)\tf_protos_cc.lib;$(Configuration)\tf_core_gpu_kernels.lib;glog.lib;gflags_static.lib;lib\$(Platform)\cudart_static.lib;lib\$(Platform)\cuda.lib;lib\$(Platform)\cublas.lib;lib\$(Platform)\cublas_device.lib;lib\$(Platform)\cufft.lib;lib\$(Platform)\curand.lib;extras\CUPTI\lib$(Platform)\cupti.lib;lib\$(Platform)\cusolver.lib;lib\$(Platform)\cudnn.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>_WIN32_WINNT=0x600;NOMINMAX;COMPILER_MSVC;GFLAGS_DLL_DECLARE_FLAG=;GFLAGS_DLL_DEFINE_FLAG=;GLOG_NO_ABBREVIATED_SEVERITIES;GOOGLE_GLOG_DLL_DECL=;GFLAGS_IS_A_DLL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(tensorflow_SourcePath);$(tensorflow_BuildPath);$(tensorflow_BuildPath)\nsync\install\include;$(tensorflow_BuildPath)\external\eigen_archive;$(tensorflow_SourcePath)\third_party\eigen3;$(tensorflow_BuildPath)\protobuf\src\protobuf\src;$(tensorflow_BuildPath)\grpc\src\grpc\include;$(glog_BuildPath);$(glog_SourcePath)\src;$(gflags_BuildPath)\include;$(boost_IncludePath);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <TargetMachine>MachineX86</TargetMachine>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(CUDA_PATH);$(tensorflow_BuildPath);$(glog_BuildPath)\$(Configuration);$(gflags_BuildPath)\lib\$(Configuration);$(boost_LibPath);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>png\install\lib\libpng12_static.lib;sqlite\install\lib\sqlite.lib;zlib\install\lib\zlibstatic.lib;gif\install\lib\giflib.lib;jpeg\install\lib\libjpeg.lib;lmdb\install\lib\lmdb.lib;farmhash\install\lib\farmhash.lib;fft2d\\src\lib\fft2d.lib;highwayhash\install\lib\highwayhash.lib;nsync\install\lib\nsync.lib;jsoncpp\src\jsoncpp\src\lib_json\$(Configuration)\jsoncpp.lib;re2\src\re2\$(Configuration)\re2.lib;protobuf\src\protobuf\$(Configuration)\libprotobuf.lib;grpc\src\grpc\$(Configuration)\gpr.lib;grpc\src\grpc\$(Configuration)\grpc_unsecure.lib;grpc\src\grpc\$(Configuration)\grpc++_unsecure.lib;snappy\src\snappy\$(Configuration)\snappy.lib;tf_cc_while_loop.dir\$(Configuration)\tf_cc_while_loop.lib;tf_stream_executor.dir\$(Configuration)\tf_stream_executor.lib;$(Configuration)\tf_protos_cc.lib;$(Configuration)\tf_core_gpu_kernels.lib;glog.lib;gflags_static.lib;lib\$(Platform)\cudart_static.lib;lib\$(Platform)\cuda.lib;lib\$(Platform)\cublas.lib;lib\$(Platform)\cublas_device.lib;lib\$(Platform)\cufft.lib;lib\$(Platform)\curand.lib;extras\CUPTI\lib$(Platform)\cupti.lib;lib\$(Platform)\cusolver.lib;lib\$(Platform)\cudnn.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PreprocessorDefinitions>_WIN32_WINNT=0x600;NOMINMAX;COMPILER_MSVC;GFLAGS_DLL_DECLARE_FLAG=;GFLAGS_DLL_DEFINE_FLAG=;GLOG_NO_ABBREVIATED_SEVERITIES;GOOGLE_GLOG_DLL_DECL=;GFLAGS_IS_A_DLL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(tensorflow_SourcePath);$(tensorflow_BuildPath);$(tensorflow_BuildPath)\nsync\install\include;$(tensorflow_BuildPath)\external\eigen_archive;$(tensorflow_SourcePath)\third_party\eigen3;$(tensorflow_BuildPath)\protobuf\src\protobuf\src;$(tensorflow_BuildPath)\grpc\src\grpc\include;$(glog_BuildPath);$(glog_SourcePath)\src;$(gflags_BuildPath)\include;$(boost_IncludePath);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link />
+    <Link>
+      <AdditionalDependencies>png\install\lib\libpng12_static.lib;sqlite\install\lib\sqlite.lib;zlib\install\lib\zlibstatic.lib;gif\install\lib\giflib.lib;jpeg\install\lib\libjpeg.lib;lmdb\install\lib\lmdb.lib;farmhash\install\lib\farmhash.lib;fft2d\\src\lib\fft2d.lib;highwayhash\install\lib\highwayhash.lib;nsync\install\lib\nsync.lib;jsoncpp\src\jsoncpp\src\lib_json\$(Configuration)\jsoncpp.lib;re2\src\re2\$(Configuration)\re2.lib;protobuf\src\protobuf\$(Configuration)\libprotobuf.lib;grpc\src\grpc\$(Configuration)\gpr.lib;grpc\src\grpc\$(Configuration)\grpc_unsecure.lib;grpc\src\grpc\$(Configuration)\grpc++_unsecure.lib;snappy\src\snappy\$(Configuration)\snappy.lib;tf_cc_while_loop.dir\$(Configuration)\tf_cc_while_loop.lib;tf_stream_executor.dir\$(Configuration)\tf_stream_executor.lib;$(Configuration)\tf_protos_cc.lib;$(Configuration)\tf_core_gpu_kernels.lib;glog.lib;gflags_static.lib;lib\$(Platform)\cudart_static.lib;lib\$(Platform)\cuda.lib;lib\$(Platform)\cublas.lib;lib\$(Platform)\cublas_device.lib;lib\$(Platform)\cufft.lib;lib\$(Platform)\curand.lib;extras\CUPTI\lib$(Platform)\cupti.lib;lib\$(Platform)\cusolver.lib;lib\$(Platform)\cudnn.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(CUDA_PATH);$(tensorflow_BuildPath);$(glog_BuildPath)\$(Configuration);$(gflags_BuildPath)\lib\$(Configuration);$(boost_LibPath);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>/WHOLEARCHIVE:tf_core_lib.dir\$(Configuration)\tf_core_lib.lib
+/WHOLEARCHIVE:tf_core_cpu.dir\$(Configuration)\tf_core_cpu.lib
+/WHOLEARCHIVE:tf_core_framework.dir\$(Configuration)\tf_core_framework.lib
+/WHOLEARCHIVE:tf_core_kernels.dir\$(Configuration)\tf_core_kernels.lib
+/WHOLEARCHIVE:tf_cc_framework.dir\$(Configuration)\tf_cc_framework.lib
+/WHOLEARCHIVE:tf_cc.dir\$(Configuration)\tf_cc_ops.lib 
+/WHOLEARCHIVE:tf_core_direct_session.dir\$(Configuration)\tf_core_direct_session.lib 
+/WHOLEARCHIVE:tf_core_ops.dir\$(Configuration)\tf_core_ops.lib   
+/WHOLEARCHIVE:tf_stream_executor.dir\$(Configuration)\tf_stream_executor.lib
+/WHOLEARCHIVE:tf_cc.dir\$(Configuration)\tf_cc.lib 
+/WHOLEARCHIVE:tf_cc_ops.dir\$(Configuration)\tf_cc_ops.lib %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+    <CustomBuildStep>
+      <Command>
+      </Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>%(Outputs)</Outputs>
+    </CustomBuildStep>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(tensorflow_SourcePath);$(tensorflow_BuildPath);$(tensorflow_BuildPath)\nsync\install\include;$(tensorflow_BuildPath)\external\eigen_archive;$(tensorflow_SourcePath)\third_party\eigen3;$(tensorflow_BuildPath)\protobuf\src\protobuf\src;$(tensorflow_BuildPath)\grpc\src\grpc\include;$(glog_BuildPath);$(glog_SourcePath)\src;$(gflags_BuildPath)\include;$(boost_IncludePath);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_WIN32_WINNT=0x600;NOMINMAX;COMPILER_MSVC;GFLAGS_DLL_DECLARE_FLAG=;GFLAGS_DLL_DEFINE_FLAG=;GLOG_NO_ABBREVIATED_SEVERITIES;GOOGLE_GLOG_DLL_DECL=;GFLAGS_IS_A_DLL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(CUDA_PATH);$(tensorflow_BuildPath);$(glog_BuildPath)\$(Configuration);$(gflags_BuildPath)\lib\$(Configuration);$(boost_LibPath);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>png\install\lib\libpng12_static.lib;sqlite\install\lib\sqlite.lib;zlib\install\lib\zlibstatic.lib;gif\install\lib\giflib.lib;jpeg\install\lib\libjpeg.lib;lmdb\install\lib\lmdb.lib;farmhash\install\lib\farmhash.lib;fft2d\\src\lib\fft2d.lib;highwayhash\install\lib\highwayhash.lib;nsync\install\lib\nsync.lib;jsoncpp\src\jsoncpp\src\lib_json\$(Configuration)\jsoncpp.lib;re2\src\re2\$(Configuration)\re2.lib;protobuf\src\protobuf\$(Configuration)\libprotobuf.lib;grpc\src\grpc\$(Configuration)\gpr.lib;grpc\src\grpc\$(Configuration)\grpc_unsecure.lib;grpc\src\grpc\$(Configuration)\grpc++_unsecure.lib;snappy\src\snappy\$(Configuration)\snappy.lib;tf_cc_while_loop.dir\$(Configuration)\tf_cc_while_loop.lib;tf_stream_executor.dir\$(Configuration)\tf_stream_executor.lib;$(Configuration)\tf_protos_cc.lib;$(Configuration)\tf_core_gpu_kernels.lib;glog.lib;gflags_static.lib;lib\$(Platform)\cudart_static.lib;lib\$(Platform)\cuda.lib;lib\$(Platform)\cublas.lib;lib\$(Platform)\cublas_device.lib;lib\$(Platform)\cufft.lib;lib\$(Platform)\curand.lib;extras\CUPTI\lib$(Platform)\cupti.lib;lib\$(Platform)\cusolver.lib;lib\$(Platform)\cudnn.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="model\checkpoint_state.proto">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Tensorflow_BuildPath)\protobuf\src\protobuf\Release\protoc.exe --proto_path=$(ProjectDir) --cpp_out=$(ProjectDir) %(FullPath)</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Performing Protoc Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)%(Filename).pb.h;$(ProjectDir)%(Filename).pb.cc;%(Outputs)</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+    </CustomBuild>
+    <CustomBuild Include="model\model_config.proto">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Tensorflow_BuildPath)\protobuf\src\protobuf\Release\protoc.exe --proto_path=$(ProjectDir) --cpp_out=$(ProjectDir) %(FullPath)</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)%(Filename).pb.h;$(ProjectDir)%(Filename).pb.cc;%(Outputs)</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Performing Protoc Build Tools</Message>
+    </CustomBuild>
+    <CustomBuild Include="dist\dist_config.proto">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Tensorflow_BuildPath)\protobuf\src\protobuf\Release\protoc.exe --proto_path=$(ProjectDir) --cpp_out=$(ProjectDir) %(FullPath)</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Performing Protoc Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)%(Filename).pb.h;$(ProjectDir)%(Filename).pb.cc;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="dist\dist_zero_model.proto">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Tensorflow_BuildPath)\protobuf\src\protobuf\Release\protoc.exe --proto_path=$(ProjectDir) --cpp_out=$(ProjectDir) %(FullPath)
+$(Tensorflow_BuildPath)\protobuf\src\protobuf\Release\protoc.exe --proto_path=$(ProjectDir) --grpc_out=$(ProjectDir) --plugin=protoc-gen-grpc=$(Tensorflow_BuildPath)\grpc\src\grpc\Release\grpc_cpp_plugin.exe %(FullPath)</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Performing Protoc Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)%(Filename).pb.h;$(ProjectDir)%(Filename).pb.cc;$(ProjectDir)%(Filename).grpc.pb.h;$(ProjectDir)%(Filename).grpc.pb.cc;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="mcts\mcts_config.proto">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Tensorflow_BuildPath)\protobuf\src\protobuf\Release\protoc.exe --proto_path=$(ProjectDir) --cpp_out=$(ProjectDir) %(FullPath)</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Performing Protoc Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)%(Filename).pb.h;$(ProjectDir)%(Filename).pb.cc;%(Outputs)</Outputs>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="common\go_comm.cc" />
+    <ClCompile Include="common\go_state.cc" />
+    <ClCompile Include="common\str_utils.cc" />
+    <ClCompile Include="common\thread_conductor.cc" />
+    <ClCompile Include="common\timer.cc" />
+    <ClCompile Include="common\wait_group.cc" />
+    <ClCompile Include="dist\async_dist_zero_model_client.cc" />
+    <ClCompile Include="dist\dist_config.pb.cc" />
+    <ClCompile Include="dist\dist_zero_model.grpc.pb.cc" />
+    <ClCompile Include="dist\dist_zero_model.pb.cc" />
+    <ClCompile Include="dist\dist_zero_model_client.cc" />
+    <ClCompile Include="dist\leaky_bucket.cc" />
+    <ClCompile Include="mcts\byo_yomi_timer.cc" />
+    <ClCompile Include="mcts\mcts_config.cc" />
+    <ClCompile Include="mcts\mcts_config.pb.cc" />
+    <ClCompile Include="mcts\mcts_debugger.cc" />
+    <ClCompile Include="mcts\mcts_engine.cc" />
+    <ClCompile Include="mcts\mcts_main.cc" />
+    <ClCompile Include="mcts\mcts_monitor.cc" />
+    <ClCompile Include="model\checkpoint_state.pb.cc" />
+    <ClCompile Include="model\checkpoint_utils.cc" />
+    <ClCompile Include="model\model_config.pb.cc" />
+    <ClCompile Include="model\trt_zero_model.cc" />
+    <ClCompile Include="model\zero_model.cc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="common\errordef.h" />
+    <ClInclude Include="common\go_comm.h" />
+    <ClInclude Include="common\go_state.h" />
+    <ClInclude Include="common\str_utils.h" />
+    <ClInclude Include="common\task_queue.h" />
+    <ClInclude Include="common\thread_conductor.h" />
+    <ClInclude Include="common\timer.h" />
+    <ClInclude Include="common\wait_group.h" />
+    <ClInclude Include="dist\async_dist_zero_model_client.h" />
+    <ClInclude Include="dist\async_rpc_queue.h" />
+    <ClInclude Include="dist\dist_config.pb.h" />
+    <ClInclude Include="dist\dist_zero_model.grpc.pb.h" />
+    <ClInclude Include="dist\dist_zero_model.pb.h" />
+    <ClInclude Include="dist\dist_zero_model_client.h" />
+    <ClInclude Include="dist\leaky_bucket.h" />
+    <ClInclude Include="mcts\byo_yomi_timer.h" />
+    <ClInclude Include="mcts\mcts_config.h" />
+    <ClInclude Include="mcts\mcts_config.pb.h" />
+    <ClInclude Include="mcts\mcts_debugger.h" />
+    <ClInclude Include="mcts\mcts_engine.h" />
+    <ClInclude Include="mcts\mcts_monitor.h" />
+    <ClInclude Include="model\checkpoint_state.pb.h" />
+    <ClInclude Include="model\checkpoint_utils.h" />
+    <ClInclude Include="model\model_config.pb.h" />
+    <ClInclude Include="model\trt_zero_model.h" />
+    <ClInclude Include="model\zero_model.h" />
+    <ClInclude Include="model\zero_model_base.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+</Project>

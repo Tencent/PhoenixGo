@@ -18,6 +18,7 @@
 #pragma once
 
 #include <vector>
+#include <functional>
 
 #include "common/errordef.h"
 

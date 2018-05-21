@@ -27,6 +27,12 @@
 // #include <glog/logging.h>
 #include "go_comm.h"
 
+#if defined(_WIN32) || defined(_WIN64)
+#  include <intrin.h>
+#  define __builtin_popcount __popcnt
+#  define __builtin_popcountll __popcnt64
+#endif
+
 template<class IntType>
 inline IntType Lowbit(const IntType &x) {
     return x & (-x);
