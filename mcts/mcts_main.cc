@@ -335,8 +335,8 @@ void GTPServingOnPort(int port)
         }
 
 #if defined(_WIN32) || defined(_WIN64)
-		stream.rdbuf()->set_option(asio::ip::tcp::socket::keep_alive(true));
-		GTPServing(stream, stream);
+        stream.rdbuf()->set_option(asio::ip::tcp::socket::keep_alive(true));
+        GTPServing(stream, stream);
 #else
         if (FLAGS_fork_per_request) {
             int pid, fork_cnt;

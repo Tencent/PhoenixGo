@@ -197,26 +197,26 @@ void CreateQuickLog2Table() {
 #if defined(_WIN32) || defined(_WIN64)
 static int rand_r(unsigned int *seed)
 {
-	unsigned int next = *seed;
-	int result;
+    unsigned int next = *seed;
+    int result;
 
-	next *= 1103515245;
-	next += 12345;
-	result = (unsigned int)(next / 65536) % 2048;
+    next *= 1103515245;
+    next += 12345;
+    result = (unsigned int)(next / 65536) % 2048;
 
-	next *= 1103515245;
-	next += 12345;
-	result <<= 10;
-	result ^= (unsigned int)(next / 65536) % 1024;
+    next *= 1103515245;
+    next += 12345;
+    result <<= 10;
+    result ^= (unsigned int)(next / 65536) % 1024;
 
-	next *= 1103515245;
-	next += 12345;
-	result <<= 10;
-	result ^= (unsigned int)(next / 65536) % 1024;
+    next *= 1103515245;
+    next += 12345;
+    result <<= 10;
+    result ^= (unsigned int)(next / 65536) % 1024;
 
-	*seed = next;
+    *seed = next;
 
-	return result;
+    return result;
 }
 #endif
 

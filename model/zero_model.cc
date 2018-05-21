@@ -188,12 +188,12 @@ int ZeroModel::GetGlobalStep(int &global_step)
 void ZeroModel::SetMKLEnv(const ModelConfig &model_config)
 {
 #if defined(_WIN32) || defined(_WIN64)
-	_putenv_s("KMP_BLOCKTIME", std::to_string(model_config.kmp_blocktime()).c_str());
-	_putenv_s("KMP_SETTINGS", std::to_string(model_config.kmp_settings()).c_str());
-	_putenv_s("KMP_AFFINITY", model_config.kmp_affinity().c_str());
-	if (model_config.intra_op_parallelism_threads() > 0) {
-		_putenv_s("OMP_NUM_THREADS", std::to_string(model_config.intra_op_parallelism_threads()).c_str());
-	}
+    _putenv_s("KMP_BLOCKTIME", std::to_string(model_config.kmp_blocktime()).c_str());
+    _putenv_s("KMP_SETTINGS", std::to_string(model_config.kmp_settings()).c_str());
+    _putenv_s("KMP_AFFINITY", model_config.kmp_affinity().c_str());
+    if (model_config.intra_op_parallelism_threads() > 0) {
+        _putenv_s("OMP_NUM_THREADS", std::to_string(model_config.intra_op_parallelism_threads()).c_str());
+    }
 #else
     setenv("KMP_BLOCKTIME", std::to_string(model_config.kmp_blocktime()).c_str(), 0);
     setenv("KMP_SETTINGS", std::to_string(model_config.kmp_settings()).c_str(), 0);
