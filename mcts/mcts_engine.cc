@@ -165,6 +165,11 @@ void MCTSEngine::Move(GoCoordId x, GoCoordId y)
         LOG(INFO) << "reload config succ: \n" << m_config.DebugString();
     }
 
+    if (!m_config.disable_double_pass_scoring() && m_board.IsDoublePass()) {
+        LOG(INFO) << "Move: double pass, game ends";
+        return;
+    }
+
     if (m_config.enable_background_search()) {
         SearchResume();
     } else {
