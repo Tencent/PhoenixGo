@@ -221,6 +221,7 @@ std::pair<bool, std::string> GTPExecute(MCTSEngine &engine, const std::string &c
             DecodeMove(move, x, y);
             engine.Move(x, y);
         }
+        return {true, ""};
     }
     if (op == "play") {
         ReloadConfig(engine, FLAGS_config_path);
