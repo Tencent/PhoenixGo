@@ -15,6 +15,6 @@ echo log to %CD%\log >&2
 md log 2>NUL
 
 echo start mcts_main >&2
-call x64\Release\mcts_main --config_path=%config% --gtp --log_dir=log --v=1
+x64\Release\mcts_main --config_path=%config% --gtp --log_dir=log --v=1
 
 popd

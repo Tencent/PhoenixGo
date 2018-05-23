@@ -233,7 +233,7 @@ std::pair<bool, std::string> GTPExecute(MCTSEngine &engine, const std::string &c
             engine.Move(-1, -1);
         }
         engine.Move(x, y);
-        fprintf(stderr, "%s\n", engine.GetDebugger().GetLastMoveDebugStr().c_str());
+        std::cerr << engine.GetDebugger().GetLastMoveDebugStr() << std::endl;
         return {true, ""};
     }
     if (op == "genmove") {
@@ -246,7 +246,7 @@ std::pair<bool, std::string> GTPExecute(MCTSEngine &engine, const std::string &c
         GoCoordId x = -1, y = -1;
         engine.GenMove(x, y);
         engine.Move(x, y);
-        fprintf(stderr, "%s\n", engine.GetDebugger().GetLastMoveDebugStr().c_str());
+        std::cerr << engine.GetDebugger().GetLastMoveDebugStr() << std::endl;
         return {true, EncodeMove(x, y)};
     }
     if (op == "final_score") {
@@ -267,6 +267,7 @@ void GTPServing(std::istream &in, std::ostream &out)
 {
     auto engine = InitEngine(FLAGS_config_path);
     InitMoves(*engine, FLAGS_init_moves);
+    std::cerr << std::flush;
 
     int id;
     bool has_id, succ;
