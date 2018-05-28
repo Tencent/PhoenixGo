@@ -109,7 +109,13 @@ Same as Linux.
 
 ### On Windows
 
-Work in progress.
+#### Use Pre-built Binary
+
+Download and extract https://github.com/Tencent/PhoenixGo/releases/download/win-x64-gpu-v1/PhoenixGo-win-x64-gpu-v1.zip
+
+Or CPU-only version https://github.com/Tencent/PhoenixGo/releases/download/win-x64-cpuonly-v1/PhoenixGo-win-x64-cpuonly-v1.zip
+
+Follow the document: how to install phoenixgo.pdf
 
 ## Configure Guide
 
