@@ -10,9 +10,9 @@ http_archive(
 
 http_archive(
     name = "org_tensorflow",
-    urls = ["https://github.com/tensorflow/tensorflow/archive/v1.7.0.tar.gz"],
-    sha256 = "c676a96fc8700722816b2b98c85578b2f99fac7a7b2484c9c7f0641484f8d50d",
-    strip_prefix = "tensorflow-1.7.0",
+    urls = ["https://github.com/tensorflow/tensorflow/archive/v1.8.0.tar.gz"],
+    sha256 = "47646952590fd213b747247e6870d89bb4a368a95ae3561513d6c76e44f92a75",
+    strip_prefix = "tensorflow-1.8.0",
     patches = ["//third_party/tensorflow:tensorflow.patch"],
 )
 
