@@ -12,7 +12,7 @@ if [[ -z $config ]]; then
     else
         ldd bazel-bin/mcts/mcts_main | grep libcuda > /dev/null
         has_cuda=$?
-        if [[ $has_cuda ]]; then
+        if [[ $has_cuda == "0" ]]; then
             echo "mcts_main was built with CUDA support" >&2
         else
             echo "mcts_main wasn't built with CUDA support" >&2
@@ -20,20 +20,20 @@ if [[ -z $config ]]; then
 
         ldd bazel-bin/mcts/mcts_main | grep libnvinfer > /dev/null
         has_tensorrt=$?
-        if [[ $has_cuda ]]; then
+        if [[ $has_tensorrt == "0" ]]; then
             echo "mcts_main was built with TensorRT support" >&2
         else
             echo "mcts_main wasn't built with TensorRT support" >&2
         fi
 
         num_gpu=0
-        if [[ $has_cuda ]]; then
+        if [[ $has_cuda == "0" ]]; then
             num_gpu=`nvidia-smi -L | wc -l`
             echo "found $num_gpu GPU(s)" >&2
         fi
 
-        if [[ $has_cuda && $num_gpu -gt 0 ]]; then
-            if [[ $has_tensorrt ]]; then
+        if [[ $has_cuda == "0" && $num_gpu -gt 0 ]]; then
+            if [[ $has_tensorrt == "0" ]]; then
                 config="etc/mcts_${num_gpu}gpu.conf"
             else
                 config="etc/mcts_${num_gpu}gpu_notensorrt.conf"
