@@ -950,7 +950,7 @@ int MCTSEngine::GetBestMove(float &v_resign)
         } else {
             visit_count[i] = ch[i].visit_count;
             total_action[i] = (float)ch[i].total_action / k_action_value_base;
-            mean_action[i] = visit_count[i] == 0 ? 0.0f : total_action[i] / visit_count[i];
+            mean_action[i] = visit_count[i] == 0 ? -1.0f : total_action[i] / visit_count[i];
             prior_prob[i] = ch[i].prior_prob;
             value[i] = ch[i].value;
         }
