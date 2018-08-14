@@ -31,9 +31,9 @@ tf_workspace(path_prefix = "", tf_repo_name = "org_tensorflow")
 
 http_archive(
     name = "com_github_nelhage_rules_boost",
-    urls = ["https://github.com/nelhage/rules_boost/archive/769c22fa72177314cd6fae505bd36116d6ed1f6b.tar.gz"],
-    sha256 = "b2fccaabeb6ee243c7632dd2a4d0419c78e43e1f063cb4b6a117630d060b440e",
-    strip_prefix = "rules_boost-769c22fa72177314cd6fae505bd36116d6ed1f6b",
+    urls = ["https://github.com/nelhage/rules_boost/archive/c1975a9a45c97823ae9e68fbccb821418099168f.tar.gz"],
+    sha256 = "ab8403986bea12da70c1ed86ef688e72c3062dd6b6a9a84035c4f13145defb93",
+    strip_prefix = "rules_boost-c1975a9a45c97823ae9e68fbccb821418099168f",
 )
 
 load("@com_github_nelhage_rules_boost//:boost/boost.bzl", "boost_deps")
