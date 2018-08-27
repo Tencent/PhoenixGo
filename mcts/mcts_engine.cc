@@ -900,6 +900,14 @@ void MCTSEngine::InitRoot()
             ch[i].prior_prob = (1 - m_config.dirichlet_noise_ratio()) * ch[i].prior_prob +
                                 m_config.dirichlet_noise_ratio() * noise[i] / noise_sum;
         }
+        bool dumb_pass = m_board.GetWinner() != m_board.CurrentPlayer();
+        if (dumb_pass && m_root->value < 0.5 && !m_config.disable_double_pass_scoring()) {
+            for (int i = 0; i < ch_len; ++i) {
+                if (ch[i].move == GoComm::COORD_PASS) {
+                    ch[i].prior_prob = 1e-5f;
+                }
+            }
+        }
     }
 }
 
