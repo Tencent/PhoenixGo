@@ -144,7 +144,7 @@ void MCTSEngine::Move(GoCoordId x, GoCoordId y)
     }
 
     int ret = m_board.Move(x, y);
-    CHECK_EQ(ret, 0) << "Move: failed, " << GoFunction::CoordToId(x, y) << ", ret" << ret;
+    CHECK_EQ(ret, 0) << "Move: failed, " << GoFunction::CoordToStr(x, y) << ", ret" << ret;
 
     ++m_num_moves;
     if (m_moves_str.size()) m_moves_str += ",";
