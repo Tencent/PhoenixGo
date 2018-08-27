@@ -42,7 +42,7 @@ class LocalMonitor
     static void UpdateMax(T &a, T b) { if (a < b) a = b; }
 
  public:
-    LocalMonitor() { Reset(); }
+    LocalMonitor(int id): m_id(id) { Reset(); }
 
     void Reset()
     {
@@ -146,6 +146,8 @@ class LocalMonitor
     }
 
  private:
+    int m_id;
+
     float m_max_eval_cost_ms;
     Average m_avg_eval_cost_ms;
 
@@ -192,28 +194,14 @@ class MCTSMonitor
     void MonitorRoutine();
 
  private:
-    void AddLocal(LocalMonitor *p)
-    {
-        std::lock_guard<std::mutex> lock(m_local_monitors_mutex);
-        m_local_monitors.push_back(p);
-    }
-
-    void DelLocal(LocalMonitor *p)
-    {
-        std::lock_guard<std::mutex> lock(m_local_monitors_mutex);
-        m_local_monitors.erase(std::find(m_local_monitors.begin(), m_local_monitors.end(), p));
-    }
-
     LocalMonitor &GetLocal()
     {
-        if (g_local_monitors[m_id] == nullptr) {
-            g_local_monitors[m_id] = std::shared_ptr<LocalMonitor>(
-                new LocalMonitor,
-                [this](LocalMonitor *p) { DelLocal(p); delete p; }
-            );
-            AddLocal(g_local_monitors[m_id].get());
+        if (g_local_monitors[m_slot] == nullptr || g_local_monitors[m_slot]->m_id != m_id) {
+            g_local_monitors[m_slot] = std::make_shared<LocalMonitor>(m_id);
+            std::lock_guard<std::mutex> lock(m_local_monitors_mutex);
+            m_local_monitors.push_back(g_local_monitors[m_slot]);
         }
-        return *g_local_monitors[m_id];
+        return *g_local_monitors[m_slot];
     }
 
     template<class T, class Fn>
@@ -221,8 +209,8 @@ class MCTSMonitor
     {
         T ret = 0;
         std::lock_guard<std::mutex> lock(m_local_monitors_mutex);
-        for (auto *local_monitor: m_local_monitors) {
-            update_fn(ret, local_monitor->*field);
+        for (auto &local_monitor: m_local_monitors) {
+            update_fn(ret, local_monitor.get()->*field);
         }
         return ret;
     }
@@ -285,10 +273,12 @@ class MCTSMonitor
     ThreadConductor m_monitor_thread_conductor;
 
     int m_id;
-    std::vector<LocalMonitor*> m_local_monitors;
+    int m_slot;
+    std::vector<std::shared_ptr<LocalMonitor>> m_local_monitors;
     std::mutex m_local_monitors_mutex;
 
     static const int k_max_monitor_instances = 1000;
+    static int g_next_monitor_id;
     static MCTSMonitor *g_global_monitors[k_max_monitor_instances];
     static std::mutex g_global_monitors_mutex;
     static thread_local std::shared_ptr<LocalMonitor> g_local_monitors[k_max_monitor_instances];

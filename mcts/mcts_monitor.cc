@@ -21,20 +21,21 @@
 
 #include "mcts_engine.h"
 
+int MCTSMonitor::g_next_monitor_id = 0;
 MCTSMonitor *MCTSMonitor::g_global_monitors[k_max_monitor_instances];
 std::mutex MCTSMonitor::g_global_monitors_mutex;
 thread_local std::shared_ptr<LocalMonitor> MCTSMonitor::g_local_monitors[k_max_monitor_instances];
 
 MCTSMonitor::MCTSMonitor(MCTSEngine *engine)
-    : m_engine(engine), m_id(0)
+    : m_engine(engine), m_slot(0)
 {
     {
         std::lock_guard<std::mutex> lock(g_global_monitors_mutex);
-        while (m_id < k_max_monitor_instances && g_global_monitors[m_id]) ++m_id;
-        CHECK(m_id < k_max_monitor_instances) << "Too many MCTSMonitor instances";
-        g_global_monitors[m_id] = this;
+        m_id = g_next_monitor_id++;
+        while (m_slot < k_max_monitor_instances && g_global_monitors[m_slot]) ++m_slot;
+        CHECK(m_slot < k_max_monitor_instances) << "Too many MCTSMonitor instances";
+        g_global_monitors[m_slot] = this;
     }
-    Reset();
     if (m_engine->GetConfig().monitor_log_every_ms() > 0) {
         m_monitor_thread = std::thread(&MCTSMonitor::MonitorRoutine, this);
     }
@@ -42,28 +43,27 @@ MCTSMonitor::MCTSMonitor(MCTSEngine *engine)
 
 MCTSMonitor::~MCTSMonitor()
 {
-    if (m_engine->GetConfig().monitor_log_every_ms() > 0) {
+    if (m_monitor_thread.joinable()) {
         m_monitor_thread_conductor.Terminate();
         m_monitor_thread.join();
     }
-    g_local_monitors[m_id] = nullptr;
-    if (m_local_monitors.size()) {
-        LOG(WARNING) << "MCTSMonitor deconstruct before all other monitor thread exit";
-    }
+    g_local_monitors[m_slot] = nullptr;
     std::lock_guard<std::mutex> lock(g_global_monitors_mutex);
-    g_global_monitors[m_id] = nullptr;
+    g_global_monitors[m_slot] = nullptr;
 }
 
 void MCTSMonitor::Pause()
 {
-    if (m_engine->GetConfig().monitor_log_every_ms() > 0) {
-        m_monitor_thread_conductor.Pause();
-    }
+    m_monitor_thread_conductor.Pause();
+    m_monitor_thread_conductor.Join();
 }
 
 void MCTSMonitor::Resume()
 {
     if (m_engine->GetConfig().monitor_log_every_ms() > 0) {
+        if (!m_monitor_thread.joinable()) {
+            m_monitor_thread = std::thread(&MCTSMonitor::MonitorRoutine, this);
+        }
         m_monitor_thread_conductor.Resume(1);
     }
 }
@@ -71,9 +71,13 @@ void MCTSMonitor::Resume()
 void MCTSMonitor::Reset()
 {
     std::lock_guard<std::mutex> lock(m_local_monitors_mutex);
-    for (auto *local_monitor: m_local_monitors) {
+    for (auto &local_monitor: m_local_monitors) {
         local_monitor->Reset();
     }
+    m_local_monitors.erase(
+        std::remove_if(m_local_monitors.begin(), m_local_monitors.end(),
+                       [](const std::shared_ptr<LocalMonitor> &ptr) { return ptr.use_count() == 1; }),
+        m_local_monitors.end());
 }
 
 void MCTSMonitor::Log()
@@ -116,7 +120,9 @@ void MCTSMonitor::MonitorRoutine()
             }
         }
         m_monitor_thread_conductor.Sleep(m_engine->GetConfig().monitor_log_every_ms() * 1000LL);
-        Log();
+        if (m_monitor_thread_conductor.IsRunning()) {
+            Log();
+        }
         google::FlushLogFiles(google::GLOG_INFO);
     }
 }
