@@ -20,6 +20,7 @@
 #include <deque>
 #include <mutex>
 #include <condition_variable>
+#include <atomic>
 #include <chrono>
 
 template<class T>
