@@ -293,14 +293,14 @@ void MCTSEngine::Eval(const GoState &board, EvalCallback callback)
     int transform_mode = g_random_engine() & 7;
     TransformFeatures(features, transform_mode);
 
-    bool dumb_pass = board.GetLastMove() == GoComm::COORD_PASS && board.GetWinner() != board.CurrentPlayer();
+    bool dumb_pass = board.GetWinner() != board.CurrentPlayer();
 
     callback =
         [this, callback, timer, transform_mode, dumb_pass]
         (int ret, std::vector<float> policy, float value) {
             if (ret == 0) {
                 if (dumb_pass && value < 0.5 && !m_config.disable_double_pass_scoring()) {
-                    policy.back() = std::min(policy.back(), 1e-5f); // disallow second PASS
+                    policy.back() = std::min(policy.back(), 1e-5f); // disallow dumb PASS
                 }
 
                 CHECK_EQ(policy.size(), GoComm::GOBOARD_SIZE + 1)
