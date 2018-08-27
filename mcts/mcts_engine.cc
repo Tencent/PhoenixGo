@@ -152,6 +152,7 @@ void MCTSEngine::Move(GoCoordId x, GoCoordId y)
     LOG(INFO) << "Move: " << m_moves_str;
 
     ChangeRoot(FindChild(m_root, GoFunction::CoordToId(x, y)));
+    m_root->move = GoFunction::CoordToId(x, y);
 
     m_debugger.UpdateLastMoveDebugStr();
     LOG(INFO) << m_debugger.GetLastMoveDebugStr();
