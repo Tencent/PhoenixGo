@@ -1,6 +1,6 @@
 ![PhoenixGo](images/logo.jpg?raw=true)
 
-**PhoenixGo** is an Go AI program which implement the AlphaGo Zero paper
+**PhoenixGo** is a Go AI program which implements the AlphaGo Zero paper
 "[Mastering the game of Go without human knowledge](https://deepmind.com/documents/119/agz_unformatted_nature.pdf)".
 It is also known as "BensonDarr" in FoxGo, "cronus" in CGOS,
 and the champion of "World AI Go Tournament 2018" held in Fuzhou China.
