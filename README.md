@@ -125,7 +125,7 @@ Here are some important options in the config file:
 * `num_search_threads`: should a bit larger than `num_eval_threads * eval_batch_size`
 * `timeout_ms_per_step`: how many time will used for each move
 * `max_simulations_per_step`: how many simulations will do for each move
-* `gpu_list`: use which GPUs, sperated by comma
+* `gpu_list`: use which GPUs, separated by comma
 * `model_config -> train_dir`: directory where trained network stored
 * `model_config -> checkpoint_path`: use which checkpoint, get from `train_dir/checkpoint` if not set
 * `model_config -> enable_tensorrt`: use TensorRT or not
