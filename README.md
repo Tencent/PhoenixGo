@@ -233,7 +233,8 @@ time_control {
 **7. Syntax error (Windows)**
 
 For windows,
-- in config file, you need to write path with `/` and not `\` in the config file .conf
+- in config file, you need to write path with `/` and not `\` in the config file .conf, 
+
 for example : 
 
 ```
@@ -243,6 +244,7 @@ model_config {
 
 - However, in cmd.exe you need to write paths with `\` and not `/`
 Also in cmd.exe command format on windows needs a space,
+
 for example : 
 
 `mcts_main.exe --gtp --config_path C:\Users\amd2018\Downloads\PhoenixGo\etc\mcts_1gpu_notensorrt.conf`
@@ -255,7 +257,7 @@ See point 8. below
 This fix works for all systems : Linux, Mac, Windows, only the name of the ckpt file changes
 Modify your config file and write the full path of your ckpt folder :
 
-for example, for linux, if username is amd2018 : 
+for example : 
 
 ```
 model_config {
