@@ -229,3 +229,44 @@ time_control {
 
 `c_denom` and `c_maxply` are parameters for deciding how to use the "main time".
 `reserved_time` is how many seconds should reserved (for network latency) in "byo-yomi time".
+
+**7. Syntax error (Windows)**
+
+For windows,
+- in config file, you need to write path with `/` and not `\` in the config file .conf
+for example : 
+
+```
+model_config {
+      train_dir: "c:/users/amd2018/Downloads/PhoenixGo/ckpt"
+```
+
+- However, in cmd.exe you need to write paths with `\` and not `/`
+Also in cmd.exe command format on windows needs a space,
+for example : 
+
+`mcts_main.exe --gtp --config_path C:\Users\amd2018\Downloads\PhoenixGo\etc\mcts_1gpu_notensorrt.conf`
+
+See point 8. below
+
+
+**8. '"ckpt/zero.ckpt-20b-v1.FP32.PLAN"' error: No such file or directory**
+
+This fix works for all systems : Linux, Mac, Windows, only the name of the ckpt file changes
+Modify your config file and write the full path of your ckpt folder :
+
+for example, for linux, if username is amd2018 : 
+
+```
+model_config {
+    train_dir: "/home/amd2018/PhoenixGo/ckpt"
+```
+    
+for example, for windows,
+
+```
+model_config {
+    train_dir: "c:/users/amd2018/Downloads/PhoenixGo/ckpt"
+```
+
+
