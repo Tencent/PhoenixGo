@@ -246,11 +246,7 @@ model_config {
 
 - in cmd.exe,
 
-Here you need to write paths with `\` and not `/`
-
-Also command format on windows needs a space and not a `=`
-
-for example : 
+Here you need to write paths with `\` and not `/`. Also command format on windows needs a space and not a `=`, for example : 
 
 `mcts_main.exe --gtp --config_path C:\Users\amd2018\Downloads\PhoenixGo\etc\mcts_1gpu_notensorrt.conf`
 
@@ -258,11 +254,7 @@ See point 8. below :
 
 **8. '"ckpt/zero.ckpt-20b-v1.FP32.PLAN"' error: No such file or directory**
 
-This fix works for all systems : Linux, Mac, Windows, only the name of the ckpt file changes
-
-Modify your config file and write the full path of your ckpt folder :
-
-for example : 
+This fix works for all systems : Linux, Mac, Windows, only the name of the ckpt file changes. Modify your config file and write the full path of your ckpt folder, for example for linux : 
 
 ```
 model_config {
@@ -313,9 +305,7 @@ Reboot to finalize
 you can export path to bashrc : 
 `export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda/extras/CUPTI/lib64" && source ~/.bashrc && sudo reboot`
 
-after reboot check if cuda installation is a success : 
-
-`cat /proc/driver/nvidia/version`
+after reboot check if cuda installation is a success : `cat /proc/driver/nvidia/version`
 
 should display something like this :
 
