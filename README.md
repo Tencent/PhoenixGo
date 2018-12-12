@@ -249,8 +249,7 @@ for example :
 
 `mcts_main.exe --gtp --config_path C:\Users\amd2018\Downloads\PhoenixGo\etc\mcts_1gpu_notensorrt.conf`
 
-See point 8. below
-
+See point 8. below :
 
 **8. '"ckpt/zero.ckpt-20b-v1.FP32.PLAN"' error: No such file or directory**
 
@@ -264,11 +263,90 @@ model_config {
     train_dir: "/home/amd2018/PhoenixGo/ckpt"
 ```
     
-for example, for windows,
+for example, for windows :
 
 ```
 model_config {
     train_dir: "c:/users/amd2018/Downloads/PhoenixGo/ckpt"
 ```
 
+**9. Most common path errors during bazel configure**
+
+### First of all, please make sure you did the post install path exports
+
+in the example below, we are using ubuntu 16.04 LTS is used with deb install of cuda 9.0 ,
+cudnn 7.1.4, and tensorrt 3.0.4, but other linux distributions with tar install are possible too
+
+The settings below have been tested to be working and to fix most common path issues, and
+are shown as an interactive help :
+
+
+- a) after cuda 9.0 deb install, it is needed to do :
+
+`export PATH=/usr/local/cuda-9.0/bin${PATH:+:${PATH}} && sudo reboot`
+
+for ubuntu users, it is also recommended to add path in /etc/environment
+
+`sudo nano /etc/environment`
+
+add this part in the paths (with the `:`) `:/usr/local/cuda/bin` , then save and exit and reboot to finalize
+
+- b) and after cudnn 7.1.4 deb install : 
+
+check if cudnn works by compiling and runing a cudnn code sample: 
+
+```
+cp -r /usr/src/cudnn_samples_v7/ ~ && cd ~/cudnn_samples_v7/mnistCUDNN && make clean && make && ./mnistCUDNN
+
+```
+should display this : `Test passed!`
+
+Reboot to finalize
+
+- c) post install for cudnn and cuda
+
+you can export path to bashrc : 
+`export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda/extras/CUPTI/lib64" && source ~/.bashrc && sudo reboot`
+
+after reboot check if cuda installation is a success : 
+
+`cat /proc/driver/nvidia/version`
+
+should display something like this :
+
+```
+NVRM version: NVIDIA UNIX x86_64 Kernel Module  384.130  Wed Mar 21 03:37:26 PDT 2018
+GCC version:  gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.10)
+
+```
+check if nvcc path works :
+
+`nvcc --version`
+
+should display something like this : 
+
+```
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2017 NVIDIA Corporation
+Built on Fri_Sep__1_21:08:03_CDT_2017
+Cuda compilation tools, release 9.0, V9.0.176
+
+```
+
+
+
+Secondly, locate cuda and cudnn paths, and update database if not here
+you will see something like this
+Reboot your computer to finalize
+
+Thirdly, during bazel compile, this is the paths you need to put
+
+
+Do you wish to build TensorFlow with CUDA support? [y/N]: y 
+CUDA support will be enabled for TensorFlow.
+
+
+credits : 
+- [nvidia pdf instal guide for cuda 9.0](http://developer.download.nvidia.com/compute/cuda/9.0/Prod/docs/sidebar/CUDA_Installation_Guide_Linux.pdf)
+- [medium.com/@zhanwenchen/](https://medium.com/@zhanwenchen/install-cuda-and-cudnn-for-tensorflow-gpu-on-ubuntu-79306e4ac04e)
 
