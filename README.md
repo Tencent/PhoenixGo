@@ -233,7 +233,9 @@ time_control {
 **7. Syntax error (Windows)**
 
 For windows,
-- in config file, you need to write path with `/` and not `\` in the config file .conf, 
+- in config file, 
+
+you need to write path with `/` and not `\` in the config file .conf, 
 
 for example : 
 
@@ -242,8 +244,11 @@ model_config {
       train_dir: "c:/users/amd2018/Downloads/PhoenixGo/ckpt"
 ```
 
-- However, in cmd.exe you need to write paths with `\` and not `/`
-Also in cmd.exe command format on windows needs a space,
+- in cmd.exe,
+
+Here you need to write paths with `\` and not `/`
+
+Also command format on windows needs a space and not a `=`
 
 for example : 
 
@@ -254,6 +259,7 @@ See point 8. below :
 **8. '"ckpt/zero.ckpt-20b-v1.FP32.PLAN"' error: No such file or directory**
 
 This fix works for all systems : Linux, Mac, Windows, only the name of the ckpt file changes
+
 Modify your config file and write the full path of your ckpt folder :
 
 for example : 
@@ -274,8 +280,8 @@ model_config {
 
 ### First of all, please make sure you did the post install path exports
 
-in the example below, we are using ubuntu 16.04 LTS is used with deb install of cuda 9.0 ,
-cudnn 7.1.4, tensorrt 3.0.4, as well as bazel 0.17.2 installed with a .run, but other linux distributions with nvidia tar install are possible too
+In the example below, ubuntu 16.04 LTS is used with cuda 9.0 (deb install) ,
+cudnn 7.1.4 (deb install), tensorrt 3.0.4 (deb install), as well as bazel 0.17.2 (.sh file install), but other linux distributions with nvidia tar install are possible too
 
 The settings below have been tested to be working and to fix most common path issues, and
 are shown as an interactive help :
@@ -381,7 +387,7 @@ TensorRT support will be enabled for TensorFlow.
 
 Please specify the location where TensorRT is installed. [Default is /usr/lib/x86_64-linux-gnu]:
 ```
-these settings are just an example, but they have been tested to successfully work on ubuntu 16.04 LTS with deb install of cuda 9.0, deb install of cudnn 7.1.4, deb install of tensorrt 3.0.4, as well as .run install of bazel 0.17.2
+these settings are just an example, other settings or package versions or linux distributions are possible too, but this example has been tested to successfully work on ubuntu 16.04 LTS with deb install of cuda 9.0, deb install of cudnn 7.1.4, deb install of tensorrt 3.0.4, as well as .sh file install of bazel 0.17.2
 
 they are provided as a general help for linux compile and run, they are not an obligatory method to use
 
