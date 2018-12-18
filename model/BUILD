@@ -1,6 +1,18 @@
 load("//:rules.bzl", "cc_proto_library")
 load("@org_tensorflow//tensorflow:tensorflow.bzl", "if_tensorrt")
 
+cc_binary(
+    name = "build_tensorrt_model",
+    srcs = ["build_tensorrt_model.cc"],
+    deps = [
+        "@com_github_google_glog//:glog",
+    ] + if_tensorrt([
+        "@local_config_tensorrt//:nv_infer",
+        "@local_config_tensorrt//:nv_parsers",
+    ]),
+    copts = if_tensorrt(["-DGOOGLE_TENSORRT=1"]),
+)
+
 cc_library(
     name = "zero_model",
     srcs = [
