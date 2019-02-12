@@ -244,9 +244,6 @@ An example for [gtp2ogs](https://github.com/online-go/gtp2ogs) is provided
 [here](https://github.com/wonderingabout/gtp2ogs-tutorial/blob/master/docs/3A4-linux-optional-edit-gtp2ogs-js-file.md) 
 and [here](https://github.com/wonderingabout/gtp2ogs-tutorial/blob/master/docs/3B4-windows-optional-edit-gtp2ogs-js-file.md)
 
-information : the BensonDarr on [FoxGo server](http://weiqi.qq.com/) is able to play with 6.5 komi
-because it has been modified, but this is not true for the PhoenixGo engine provided here.
-
 #### A13. I have a nvidia RTX card (Turing) or Tesla V100/Titan V (Volta), is it compatible ?
 
 ##### RTX cards (Turing) :
@@ -262,10 +259,10 @@ with CUDA 10.0, cudnn 7.4.2, ubuntu 18.04.
 - are compatible with cuda 9.0 and higher (it is recommended to use latest version when possible),
 cudnn 7.1.x or higher (x is any number)
 - has been tested to work successfully on windows
-- However currently there is no tensorRT support for PhoenixGo (Tesla V100 has been tested not to work
-with PhoenixGo tensorrt 3.0.4)
+- to use TensorRT with V100, you need to manually build TensorRT model on V100.
+See: [#75](https://github.com/Tencent/PhoenixGo/issues/75) for how to build TensorRT model.
 
-### Specific questions : building with bazel questions (linux and mac)
+### Specific questions : bazel issues (linux and mac)
 
 #### B1. I am getting errors during bazel configure, bazel building, and/or running PhoenixGo engine
 
@@ -286,7 +283,7 @@ This will reduce building time and will have smaller size after the building,
 see [minimalist bazel configure](/docs/minimalist-bazel-configure.md) and 
 [#76](https://github.com/Tencent/PhoenixGo/issues/76)
 
-#### B3. I cannot increase batch size to more than 4 with TensorRT (linux only) : errors
+#### B3. I cannot increase batch size to more than 4 with TensorRT (linux only)
 
 Increasing batch size in the config file makes the engine compute faster, 
 as explained earlier in 

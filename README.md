@@ -31,57 +31,42 @@ If you use PhoenixGo in your research, please consider citing the library as fol
 * (Optional) TensorRT (for accelerating computation on GPU, 3.0.4 is known-good)
 
 The following environments have also been tested by independent contributors : [here](/docs/tested-versions.md). 
-Other versions may work, but they have not been tested (especially for bazel), try and see. 
+Other versions may work, but they have not been tested (especially for bazel).
 
-Recommendation : the bazel building uses a lot of RAM, so it is recommended that you restart your computer before 
-you run the below command, and also exit all running programs, to free as much RAM as possible.
+Recommendation : the bazel building uses a lot of RAM, if your building environment is lack of RAM, you may need to
+restart your computer and exit other running programs to free as much RAM as possible.
 
-You have 2 possibilities for building on linux :
+#### Building
 
-#### Building - Possibility A : (easy) Automatic all in one command for ubuntu
-
-This all in one command includes : 
-- Download and install bazel and its dependencies (apt-get)
-- Clone PhoenixGo from Tencent github
-- Download and extract the trained network (ckpt) archive
-- Cleanup : remove the trained network archive (.tar.gz) and the bazel installer (.sh file)
-- Configure the build : during `./configure` , bazel will ask building options :  Press ENTER for default.
-CUDA and cuDNN, and optionally TensorRT, are needed only if you want the GPU version (much faster to compute moves)
-
--> If you want to build the CPU-only version, disable these features (much slower to compute moves).
--> If you want to build the GPU version, enable these features,  
-
-Then choose the other building options you want, and modify paths if needed (see 
-[FAQ question](/docs/FAQ.md/#b1-i-am-getting-errors-during-bazel-configure-bazel-building-andor-running-phoenixgo-engine) 
-if you need help)
-
-To speed up building and also to reduce build size at the same time, it is recommended to use the minimalist 
-bazel configure settings, see this example with the GPU version building : 
-[minimalist bazel configure](/docs/minimalist-bazel-configure.md)
-- Build PhoenixGo with bazel :  
-Dependencies such as Tensorflow will be downloaded and installed automatically. 
-
-The building process may take a long time (1 hour or more) : 
-
-The command below has been tested successfully on ubuntu 16.04 and 18.04 LTS for example
-
-Run the all-in one command below :
+Clone the repository and configure the building:
 
 ```
-sudo apt-get -y install pkg-config zip g++ zlib1g-dev unzip python git && git clone https://github.com/Tencent/PhoenixGo.git && cd PhoenixGo && wget https://github.com/bazelbuild/bazel/releases/download/0.11.1/bazel-0.11.1-installer-linux-x86_64.sh && chmod +x bazel-0.11.1-installer-linux-x86_64.sh && ./bazel-0.11.1-installer-linux-x86_64.sh --user && echo 'export PATH="$PATH:$HOME/bin"' >> ~/.bashrc && source ~/.bashrc && sudo ldconfig && wget https://github.com/Tencent/PhoenixGo/releases/download/trained-network-20b-v1/trained-network-20b-v1.tar.gz && tar xvzf trained-network-20b-v1.tar.gz && sudo rm -r trained-network-20b-v1.tar.gz && sudo rm -r bazel-0.11.1-installer-linux-x86_64.sh && ./configure && bazel build //mcts:mcts_main && ls
+$ git clone https://github.com/Tencent/PhoenixGo.git
+$ cd PhoenixGo
+$ ./configure
 ```
 
-After the building is a success, continue reading at [Running](#running)
+`./configure` will ask where CUDA and TensorRT have been installed, specify them if need.
 
-#### Building - Possibility B : manual steps for other use
+Then build with bazel:
 
-for other linux distributions than ubuntu, or for other specific use, see : [manual building](/docs/manual-building.md)
+```
+$ bazel build //mcts:mcts_main
+```
 
-#### Running 
+Dependices such as Tensorflow will be downloaded automatically. The building prosess may take a long time.
 
-The PhoenixGo engine supports GTP [(Go Text Protocol)](https://senseis.xmp.net/?GoTextProtocol), 
+#### Running
+
+Download and extract the trained network:
+```
+$ wget https://github.com/Tencent/PhoenixGo/releases/download/trained-network-20b-v1/trained-network-20b-v1.tar.gz
+$ tar xvzf trained-network-20b-v1.tar.gz
+```
+
+The PhoenixGo engine supports GTP [(Go Text Protocol)](https://senseis.xmp.net/?GoTextProtocol),
 which means it can be used with a GUI with GTP capability, such as [Sabaki](http://sabaki.yichuanshen.de).
-It can also run on command-line GTP server tools like [gtp2ogs](https://github.com/online-go/gtp2ogs). 
+It can also run on command-line GTP server tools like [gtp2ogs](https://github.com/online-go/gtp2ogs).
 
 But PhoenixGo does not support all GTP commands, see [FAQ question](/docs/FAQ.md/#a11-gtp-command-error--invalid-command).
 
@@ -91,30 +76,29 @@ There are 2 ways to run PhoenixGo engine
 
 Run the engine : `scripts/start.sh`
 
-`start.sh` will automatically detect the number of GPUs, run `mcts_main` with proper config file, 
+`start.sh` will automatically detect the number of GPUs, run `mcts_main` with proper config file,
 and write log files in directory `log`.
 
-You could also use a customized config file (.conf) by running `scripts/start.sh {config_path}`. 
+You could also use a customized config file (.conf) by running `scripts/start.sh {config_path}`.
 If you want to do that, see also [#configure-guide](#configure-guide).
 
-##### 2) mcts_main : full control use
+##### 2) mcts_main : fully control
 
-If you want to fully control all the options of `mcts_main` (such as, changing log destination, 
-or if start.sh is not compatible for your specific use), you can run directly `bazel-bin/mcts/mcts_main` instead. 
+If you want to fully control all the options of `mcts_main` (such as, changing log destination,
+or if start.sh is not compatible for your specific use), you can run directly `bazel-bin/mcts/mcts_main` instead.
 
-For a typical GTP use (run `genmove b` successfully for example), minimum should be to add 
-these needed command line options :
+For a typical usage, these command line options should be added:
 - `--gtp` to enable GTP mode
 - `--config_path=replace/with/path/to/your/config/file` to specify the path to your config file
-- it is also needed to edit your config file (.conf) and manually add the full path to ckpt, 
-see [FAQ question](/docs/FAQ.md/#a5-ckptzerockpt-20b-v1fp32plan-error-no-such-file-or-directory). 
-You can also change all config file settings, see [#configure-guide](#configure-guide).
-- for other extra commands , see also [#command-line-options](#command-line-options) for details, 
+- it is also needed to edit your config file (.conf) and manually add the full path to ckpt,
+see [FAQ question](/docs/FAQ.md/#a5-ckptzerockpt-20b-v1fp32plan-error-no-such-file-or-directory).
+You can also change options in config file, see [#configure-guide](#configure-guide).
+- for other command line options , see also [#command-line-options](#command-line-options) for details,
 or run `./mcts_main --help` . A copy of the `--help` is provided for your convenience [here](/docs/mcts-main-help.md)
-- for example, for the username amd2018, and PhoenixGo directory in home directory :
 
+For example:
 ```
-cd /home/amd2018/PhoenixGo/bazel-bin/mcts && ./mcts_main --gtp --config_path=/home/amd2018/PhoenixGo/etc/mcts_1gpu.conf --logtostderr --v=0
+$ bazel-bin/mcts/mcts_main --gtp --config_path=etc/mcts_1gpu.conf --logtostderr --v=0
 ```
 
 #### (Optional) : Distribute mode
@@ -124,20 +108,20 @@ PhoenixGo support running with distributed workers, if there are GPUs on differe
 Build the distribute worker:
 
 ```
-bazel build //dist:dist_zero_model_server
+$ bazel build //dist:dist_zero_model_server
 ```
 
 Run `dist_zero_model_server` on distributed worker, **one for each GPU**.
 
 ```
-CUDA_VISIBLE_DEVICES={gpu} bazel-bin/dist/dist_zero_model_server --server_address="0.0.0.0:{port}" --logtostderr
+$ CUDA_VISIBLE_DEVICES={gpu} bazel-bin/dist/dist_zero_model_server --server_address="0.0.0.0:{port}" --logtostderr
 ```
 
 Fill `ip:port` of workers in the config file (`etc/mcts_dist.conf` is an example config for 32 workers),
 and run the distributed master:
 
 ```
-scripts/start.sh etc/mcts_dist.conf
+$ scripts/start.sh etc/mcts_dist.conf
 ```
 
 ### On macOS
@@ -157,7 +141,7 @@ Same as Linux.
 
 ### On Windows
 
-For all windows versions, see correct syntax in [FAQ question](/docs/FAQ.md/#a4-syntax-error-windows)
+Recommendation: See [FAQ question](/docs/FAQ.md/#a4-syntax-error-windows), to avoid syntax errors in config file and command line options on Windows.
 
 #### Use Pre-built Binary
 
@@ -192,7 +176,7 @@ Here are some important options in the config file:
 * `num_eval_threads`: should equal to the number of GPUs
 * `num_search_threads`: should a bit larger than `num_eval_threads * eval_batch_size`
 * `timeout_ms_per_step`: how many time will used for each move
-* `max_simulations_per_step`: how many simulations will do for each move (playouts)
+* `max_simulations_per_step`: how many simulations(also called playouts) will do for each move
 * `gpu_list`: use which GPUs, separated by comma
 * `model_config -> train_dir`: directory where trained network stored
 * `model_config -> checkpoint_path`: use which checkpoint, get from `train_dir/checkpoint` if not set
@@ -232,7 +216,7 @@ Read `mcts/mcts_config.proto` for more config options.
 
 * `--config_path`: path of config file
 * `--gtp`: run as a GTP engine, if disable, gen next move only
-* `--init_moves`: initial moves on the go board, for example of use, see [#83](https://github.com/Tencent/PhoenixGo/issues/83)
+* `--init_moves`: initial moves on the go board, for example usage, see [#83](https://github.com/Tencent/PhoenixGo/issues/83)
 * `--gpu_list`: override `gpu_list` in config file
 * `--listen_port`: work with `--gtp`, run gtp engine on port in TCP protocol
 * `--allow_ip`: work with `--listen_port`, list of client ip allowed to connect
@@ -264,18 +248,4 @@ which will display the main move path winrate and continuation of moves analyzed
 
 You will find a lot of useful and important information, also most common problems and errors and how to fix them
 
-Please take time to read the FAQ
-
-Since it is too big it has been moved on a separate page
-
-[Visit the FAQ.md page here](/docs/FAQ.md)
-
-## Contributing
-
-PhoenixGo is an open source software, any person can contribute to improve and help !
-
-If you have made changes and improvements to PhoenixGo and want to add them to the PhoenixGo 
-page or software, follow these instructions : [CONTRIBUTING.md](/docs/CONTRIBUTING.md)
-
-If you have questions, ask them in the ["Issues"](https://github.com/Tencent/PhoenixGo/issues) page
-
+Please take time to read the [FAQ](/docs/FAQ.md)
