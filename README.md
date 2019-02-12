@@ -2,8 +2,9 @@
 
 **PhoenixGo** is a Go AI program which implements the AlphaGo Zero paper
 "[Mastering the game of Go without human knowledge](https://deepmind.com/documents/119/agz_unformatted_nature.pdf)".
-It is also known as "BensonDarr" and "金毛测试" in [FoxGo](http://weiqi.qq.com/), "cronus" in [CGOS](http://www.yss-aya.com/cgos/),
-and the champion of [World AI Go Tournament 2018](http://weiqi.qq.com/special/109) held in Fuzhou China.
+It is also known as "BensonDarr" and "金毛测试" in [FoxGo](http://weiqi.qq.com/), 
+"cronus" in [CGOS](http://www.yss-aya.com/cgos/), and the champion of 
+[World AI Go Tournament 2018](http://weiqi.qq.com/special/109) held in Fuzhou China.
 
 If you use PhoenixGo in your project, please consider mentioning in your README.
 
@@ -70,21 +71,32 @@ Then build with bazel:
 $ bazel build //mcts:mcts_main
 ```
 
-Dependices such as Tensorflow will be downloaded automatically. The building prosess may take a long time.
+Dependices such as Tensorflow will be downloaded automatically. 
+The building process may take a long time.
 
-#### Running
+Recommendation : the bazel building uses a lot of RAM, 
+if your building environment is lack of RAM, you may need to restart 
+your computer and exit other running programs to free as much RAM 
+as possible.
+
+#### Running PhoenixGo
 
 Download and extract the trained network:
+
 ```
 $ wget https://github.com/Tencent/PhoenixGo/releases/download/trained-network-20b-v1/trained-network-20b-v1.tar.gz
 $ tar xvzf trained-network-20b-v1.tar.gz
 ```
 
-The PhoenixGo engine supports GTP [(Go Text Protocol)](https://senseis.xmp.net/?GoTextProtocol),
-which means it can be used with a GUI with GTP capability, such as [Sabaki](http://sabaki.yichuanshen.de).
-It can also run on command-line GTP server tools like [gtp2ogs](https://github.com/online-go/gtp2ogs).
+The PhoenixGo engine supports GTP 
+[(Go Text Protocol)](https://senseis.xmp.net/?GoTextProtocol),
+which means it can be used with a GUI with GTP capability, such as 
+[Sabaki](http://sabaki.yichuanshen.de).
+It can also run on command-line GTP server tools like 
+[gtp2ogs](https://github.com/online-go/gtp2ogs).
 
-But PhoenixGo does not support all GTP commands, see [FAQ question](/docs/FAQ.md/#a11-gtp-command-error--invalid-command).
+But PhoenixGo does not support all GTP commands, see 
+[FAQ question](/docs/FAQ.md/#a11-gtp-command-error--invalid-command).
 
 There are 2 ways to run PhoenixGo engine
 
@@ -92,34 +104,42 @@ There are 2 ways to run PhoenixGo engine
 
 Run the engine : `scripts/start.sh`
 
-`start.sh` will automatically detect the number of GPUs, run `mcts_main` with proper config file,
+`start.sh` will automatically detect the number of GPUs, run `mcts_main` 
+with proper config file,
 and write log files in directory `log`.
 
-You could also use a customized config file (.conf) by running `scripts/start.sh {config_path}`.
+You could also use a customized config file (.conf) by running 
+`scripts/start.sh {config_path}`.
 If you want to do that, see also [#configure-guide](#configure-guide).
 
 ##### 2) mcts_main : fully control
 
-If you want to fully control all the options of `mcts_main` (such as, changing log destination,
-or if start.sh is not compatible for your specific use), you can run directly `bazel-bin/mcts/mcts_main` instead.
+If you want to fully control all the options of `mcts_main` (such 
+as changing log destination, or if start.sh is not compatible for your 
+specific use), you can run directly `bazel-bin/mcts/mcts_main` instead.
 
 For a typical usage, these command line options should be added:
 - `--gtp` to enable GTP mode
-- `--config_path=replace/with/path/to/your/config/file` to specify the path to your config file
-- it is also needed to edit your config file (.conf) and manually add the full path to ckpt,
-see [FAQ question](/docs/FAQ.md/#a5-ckptzerockpt-20b-v1fp32plan-error-no-such-file-or-directory).
+- `--config_path=replace/with/path/to/your/config/file` to specify the 
+path to your config file
+- it is also needed to edit your config file (.conf) and manually add 
+the full path to ckpt, see 
+[FAQ question](/docs/FAQ.md/#a5-ckptzerockpt-20b-v1fp32plan-error-no-such-file-or-directory).
 You can also change options in config file, see [#configure-guide](#configure-guide).
-- for other command line options , see also [#command-line-options](#command-line-options) for details,
-or run `./mcts_main --help` . A copy of the `--help` is provided for your convenience [here](/docs/mcts-main-help.md)
+- for other command line options , see also [#command-line-options](#command-line-options) 
+for details, or run `./mcts_main --help` . A copy of the `--help` is provided for your 
+convenience [here](/docs/mcts-main-help.md)
 
 For example:
+
 ```
 $ bazel-bin/mcts/mcts_main --gtp --config_path=etc/mcts_1gpu.conf --logtostderr --v=0
 ```
 
 #### (Optional) : Distribute mode
 
-PhoenixGo support running with distributed workers, if there are GPUs on different machine.
+PhoenixGo support running with distributed workers, if there are GPUs 
+on different machine.
 
 Build the distribute worker:
 
@@ -133,8 +153,8 @@ Run `dist_zero_model_server` on distributed worker, **one for each GPU**.
 $ CUDA_VISIBLE_DEVICES={gpu} bazel-bin/dist/dist_zero_model_server --server_address="0.0.0.0:{port}" --logtostderr
 ```
 
-Fill `ip:port` of workers in the config file (`etc/mcts_dist.conf` is an example config for 32 workers),
-and run the distributed master:
+Fill `ip:port` of workers in the config file (`etc/mcts_dist.conf` is an 
+example config for 32 workers), and run the distributed master:
 
 ```
 $ scripts/start.sh etc/mcts_dist.conf
@@ -157,7 +177,8 @@ Same as Linux.
 
 ### On Windows
 
-Recommendation: See [FAQ question](/docs/FAQ.md/#a4-syntax-error-windows), to avoid syntax errors in config file and command line options on Windows.
+Recommendation: See [FAQ question](/docs/FAQ.md/#a4-syntax-error-windows), 
+to avoid syntax errors in config file and command line options on Windows.
 
 #### Use Pre-built Binary
 
@@ -167,13 +188,15 @@ The GPU version is much faster, but works only with compatible nvidia GPU.
 It supports this environment : 
 - CUDA 9.0 only
 - cudnn 7.1.x (x is any number) or lower for CUDA 9.0
-- no AVX, AVX2, AVX512 instructions supported in this release (so it is currently much slower than the linux version)
+- no AVX, AVX2, AVX512 instructions supported in this release (so it is 
+currently much slower than the linux version)
 - there is no TensorRT support on Windows
 
 Download and extract 
 [GPU version (Windows)](https://github.com/Tencent/PhoenixGo/releases/download/win-x64-gpu-v1/PhoenixGo-win-x64-gpu-v1.zip)
 
-Then follow the document included in the archive : how to install phoenixgo.pdf
+Then follow the document included in the archive : how to install 
+phoenixgo.pdf
 
 note : to support special features like CUDA 10.0 or AVX512 for example, 
 you can build your own build for windows, see [#79](https://github.com/Tencent/PhoenixGo/issues/79)
@@ -183,7 +206,8 @@ you can build your own build for windows, see [#79](https://github.com/Tencent/P
 If your GPU is not compatible, or if you don't want to use a GPU, you can download this 
 [CPU-only version (Windows)](https://github.com/Tencent/PhoenixGo/releases/download/win-x64-cpuonly-v1/PhoenixGo-win-x64-cpuonly-v1.zip), 
 
-Follow the document included in the archive : how to install phoenixgo.pdf
+Follow the document included in the archive : how to install 
+phoenixgo.pdf
 
 ## Configure Guide
 
@@ -246,7 +270,8 @@ Glog options are also supported:
 * `--v`: verbose log, `--v=1` for turning on some debug log, `--v=0` to turning off
 
 `mcts_main --help` for more command line options.
-A copy of the `--help` is provided for your convenience [here](/docs/mcts-main-help.md)
+A copy of the `--help` is provided for your convenience 
+[here](/docs/mcts-main-help.md)
 
 ## Analysis
 
@@ -264,6 +289,7 @@ move path winrate and continuation of moves analyzed, see
 
 ## FAQ
 
-You will find a lot of useful and important information, also most common problems and errors and how to fix them
+You will find a lot of useful and important information, also most common 
+problems and errors and how to fix them
 
 Please take time to read the [FAQ](/docs/FAQ.md)
