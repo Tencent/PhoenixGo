@@ -264,6 +264,38 @@ See: [#75](https://github.com/Tencent/PhoenixGo/issues/75) for how to build Tens
 
 ### Specific questions : bazel issues (linux and mac)
 
+#### B0. It is too hard to install bazel or start bazel
+
+You may find hard to download, install, run bazel
+
+If that's the case, and if you are using ubuntu or similar operating system, 
+you can use the all-in-one command below instead of the [main README](/README.md) 
+commands
+
+Read the [main README](/README.md) for explanations and instructions : 
+the all-in-one command below only saves you the time to find how to install 
+bazel and run all the bazel commands one by one, but you still have to 
+read the [main README](/README.md) for explanations
+
+The all-in-one command below has been tested to run successfully on ubuntu 
+16.04 LTS and 18.04 LTS
+
+`sudo apt-get -y install pkg-config zip g++ zlib1g-dev unzip python git && git clone https://github.com/Tencent/PhoenixGo.git && cd PhoenixGo && wget https://github.com/bazelbuild/bazel/releases/download/0.11.1/bazel-0.11.1-installer-linux-x86_64.sh && chmod +x bazel-0.11.1-installer-linux-x86_64.sh && ./bazel-0.11.1-installer-linux-x86_64.sh --user && echo 'export PATH="$PATH:$HOME/bin"' >> ~/.bashrc && source ~/.bashrc && sudo ldconfig && wget https://github.com/Tencent/PhoenixGo/releases/download/trained-network-20b-v1/trained-network-20b-v1.tar.gz && tar xvzf trained-network-20b-v1.tar.gz && sudo rm -r trained-network-20b-v1.tar.gz bazel-0.11.1-installer-linux-x86_64.sh && ./configure && bazel build //mcts:mcts_main && ls`
+
+This all-in-one command will : 
+
+- Download and install bazel and PhoenixGo dependencies for ubuntu and 
+similar systems (need to have apt-get)
+- Clone PhoenixGo from Tencent github
+- Download and install bazel 0.11.1
+- Do the post-install of bazel
+- Download and extract trained network (ckpt)
+- Cleanup : trained network archive and remove bazel installer
+- Run `./configure` : at this step, you have to confifure bazel 
+same as explained in [main README](/README.md)
+- When configure is finished, start building automatically, 
+same as explained in [main README](/README.md)
+
 #### B1. I am getting errors during bazel configure, bazel building, and/or running PhoenixGo engine
 
 If you built with bazel, see : 

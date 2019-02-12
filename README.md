@@ -36,6 +36,10 @@ Other versions may work, but they have not been tested (especially for bazel).
 Recommendation : the bazel building uses a lot of RAM, if your building environment is lack of RAM, you may need to
 restart your computer and exit other running programs to free as much RAM as possible.
 
+Before starting : in the steps below, if you have issues on how to install or start bazel, 
+you may want to try this all-in-one command line for easier building instead, see
+[FAQ question](/docs/FAQ.md#b0-it-is-too-hard-to-install-bazel-or-run-the-bazel-commands)
+
 #### Building
 
 Clone the repository and configure the building:
