@@ -31,7 +31,7 @@ class MCTSDebugger
     std::string GetLastMoveDebugStr(); // call after move
     void UpdateLastMoveDebugStr();
 
-    std::string GetMainMovePath();
+    std::string GetMainMovePath(int rank);
     void PrintTree(int depth, int topk, const std::string &prefix = "");
 
  private:
