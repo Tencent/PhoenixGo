@@ -34,54 +34,20 @@ result is something like this (in this example there are 7000 simulations per mo
 [5489] stderr: I0116 15:55:09.910648  5489 mcts_debugger.cc:49] ========== debug info for 27th move(b) end   ==========
 ```
 
-It is also possible to develop all the tree by adding these lines to your config file :
+It is also possible to develop all the tree by adding these lines to 
+your config file :
 
 ```
 debugger {
-    print_tree_depth: 6
-    print_tree_width: 6
+    print_tree_depth: 20
+    print_tree_width: 3
 }
 ```
 
-In this example, a tree of 6 depth 6 width moves will be printed
-
+In this example, a tree of 20 depth 3 width moves will be printed
 #### A2.5 How to analyze/review one or many sgf file(s) with GoReviewPartner
 
-Support is still in testing, but so far these are the recommended settings to do use PhoenixGo with GoReviewPartner
-
-2 config files are provided to you using optimized settings for grp (GoReviewPartner)
-- with tensorrt (linux only) : [mcts_1gpu_grp.conf](/etc/mcts_1gpu_grp.conf)
-- without tensorrt (linux, mac, windows, gpu or cpu version) :
- [mcts_1gpu_notensorrt_grp.conf](/etc/mcts_1gpu_notensorrt_grp.conf)
- 
-note : it is also possible with multiple GPU, only the most common examples were shown here
-
-if you want to do the changes manually, you need to :
-
-in phoenixgo .conf config file :
-
-- disable all time settings in config file (set to `0`)
-- set time to unlimited (set timeout to 0 ms)
-- use simulations per move to have fixed computation per move (playouts), because it 
-is not needed to play fast since this is an analysis, unlimited time
-- for the same reason, set `enable background search` to 0 (disable pondering), because this is not a live game, 
-time settings are not needed and can cause conflicts
-- add debug width and height with `debugger` in config file, see previous FAQ question
-
-in grp (GoReviewPartner) settings :
-- it is easier to use one of the pre-made grp profile in config.ini (slightly modify them if needed)
-
-Don't forget to add paths in the config file as explained in 
-[FAQ question](/docs/FAQ.md/#a5-ckptzerockpt-20b-v1fp32plan-error-no-such-file-or-directory)
-
-If you're on windows, you need to also pay attention to the syntax too, 
-see [FAQ question](/docs/FAQ.md/#a4-syntax-error-windows)
-
-and run the mcts_main (not start.sh) with the needed parameters, 
-see an example 
-[here](https://github.com/wonderingabout/goreviewpartner/blob/config-profiles-phoenixgo/config.ini#L100-L116)
-
-also, see [#86](https://github.com/Tencent/PhoenixGo/issues/86) and [#99](https://github.com/pnprog/goreviewpartner/issues/99) for details
+See [this document](/docs/go-review-partner.md)
 
 #### A3. There are too much log.
 
