@@ -26,21 +26,32 @@ If you use PhoenixGo in your research, please consider citing the library as fol
 #### Requirements
 
 * GCC with C++11 support
-* [Bazel](https://docs.bazel.build/versions/master/install.html) (**0.11.1 is known-good**)
+* Bazel (**0.11.1 is known-good**)
 * (Optional) CUDA and cuDNN for GPU support 
 * (Optional) TensorRT (for accelerating computation on GPU, 3.0.4 is known-good)
 
-The following environments have also been tested by independent contributors : [here](/docs/tested-versions.md). 
-Other versions may work, but they have not been tested (especially for bazel).
+The following environments have also been tested by independent contributors : 
+[here](/docs/tested-versions.md). Other versions may work, but they have not been 
+tested (especially for bazel).
 
-Recommendation : the bazel building uses a lot of RAM, if your building environment is lack of RAM, you may need to
-restart your computer and exit other running programs to free as much RAM as possible.
+#### Download and Install Bazel 
 
-Before starting : in the steps below, if you have issues on how to install or start bazel, 
-you may want to try this all-in-one command line for easier building instead, see
+Before starting, you need to download and install bazel.
+
+You can download and install bazel for linux systems
+[here](https://docs.bazel.build/versions/master/install.html)
+
+There are different methods to download and install bazel depending 
+on your linux system and settings (apt-get, install .sh, etc..)
+
+For PhoenixGo, bazel (**0.11.1 is known-good**), read 
+[Requirements](#requirements) for details
+
+If you have issues on how to install or start bazel, you may want 
+to try this all-in-one command line for easier building instead, see
 [FAQ question](/docs/FAQ.md#b0-it-is-too-hard-to-install-bazel-or-run-the-bazel-commands)
 
-#### Building
+#### Building PhoenixGo with Bazel
 
 Clone the repository and configure the building:
 
@@ -50,7 +61,8 @@ $ cd PhoenixGo
 $ ./configure
 ```
 
-`./configure` will ask where CUDA and TensorRT have been installed, specify them if need.
+`./configure` will start the bazel configure : ask where CUDA 
+and TensorRT have been installed, specify them if need.
 
 Then build with bazel:
 
