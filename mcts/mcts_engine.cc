@@ -111,16 +111,23 @@ MCTSEngine::~MCTSEngine()
     LOG(INFO) << "~MCTSEngine: Deconstruct MCTSEngin succ";
 }
 
-void MCTSEngine::Reset()
+void MCTSEngine::Reset(const std::string &init_moves)
 {
     SearchPause();
     ChangeRoot(nullptr);
     m_board.CopyFrom(GoState(!m_config.disable_positional_superko()));
     m_simulation_counter = 0;
-    m_num_moves = 0;
-    m_moves_str.clear();
+    m_num_moves = (init_moves.size() + 1) / 3;
+    m_moves_str = init_moves;
     m_gen_passes = 0;
     m_byo_yomi_timer.Reset();
+
+    for (size_t i = 0; i < init_moves.size(); i += 3) {
+        GoCoordId x, y;
+        GoFunction::StrToCoord(init_moves.substr(i, 2), x, y);
+        m_board.Move(x, y);
+        m_root->move = GoFunction::CoordToId(x, y);
+    }
 
     if (m_config.enable_background_search()) {
         SearchResume();
@@ -217,6 +224,15 @@ void MCTSEngine::GenMove(GoCoordId &x, GoCoordId &y, std::vector<int> &visit_cou
     if (move == GoComm::COORD_PASS) {
         ++m_gen_passes;
     }
+}
+
+bool MCTSEngine::Undo()
+{
+    if (m_num_moves == 0) {
+        return false;
+    }
+    Reset(m_moves_str.substr(0, m_moves_str.size() - 3));
+    return true;
 }
 
 const GoState &MCTSEngine::GetBoard()

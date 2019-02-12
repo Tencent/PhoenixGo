@@ -90,15 +90,6 @@ void ReloadConfig(MCTSEngine &engine, const std::string &config_path)
     }
 }
 
-void InitMoves(MCTSEngine &engine, const std::string &moves)
-{
-    for (size_t i = 0; i < moves.size(); i += 3) {
-        GoCoordId x, y;
-        GoFunction::StrToCoord(moves.substr(i, 2), x, y);
-        engine.Move(x, y);
-    }
-}
-
 std::string EncodeMove(GoCoordId x, GoCoordId y)
 {
     if (GoFunction::IsPass(x, y)) {
@@ -148,7 +139,7 @@ std::pair<bool, std::string> GTPExecute(MCTSEngine &engine, const std::string &c
         return {true, "2"};
     }
     if (op == "list_commands") {
-        return {true, "name\nversion\nprotocol_version\nlist_commands\nquit\nclear_board\nboardsize\nkomi\ntime_settings\ntime_left\nplace_free_handicap\nset_free_handicap\nplay\ngenmove\nfinal_score\nget_debug_info\nget_last_move_debug_info"};
+        return {true, "name\nversion\nprotocol_version\nlist_commands\nquit\nclear_board\nboardsize\nkomi\ntime_settings\ntime_left\nplace_free_handicap\nset_free_handicap\nplay\ngenmove\nfinal_score\nget_debug_info\nget_last_move_debug_info\nundo"};
     }
     if (op == "quit") {
         return {true, ""};
@@ -259,6 +250,12 @@ std::pair<bool, std::string> GTPExecute(MCTSEngine &engine, const std::string &c
     if (op == "get_last_move_debug_info") {
         return {true, engine.GetDebugger().GetLastMoveDebugStr()};
     }
+    if (op == "undo") {
+        if (!engine.Undo()) {
+            return {false, "stack empty"};
+        }
+        return {true, ""};
+    }
     LOG(ERROR) << "invalid op: " << op;
     return {false, "unknown command"};
 }
@@ -266,7 +263,9 @@ std::pair<bool, std::string> GTPExecute(MCTSEngine &engine, const std::string &c
 void GTPServing(std::istream &in, std::ostream &out)
 {
     auto engine = InitEngine(FLAGS_config_path);
-    InitMoves(*engine, FLAGS_init_moves);
+    if (FLAGS_init_moves.size()) {
+        engine->Reset(FLAGS_init_moves);
+    }
     std::cerr << std::flush;
 
     int id;
@@ -306,7 +305,9 @@ void GTPServing(std::istream &in, std::ostream &out)
 void GenMoveOnce()
 {
     auto engine = InitEngine(FLAGS_config_path);
-    InitMoves(*engine, FLAGS_init_moves);
+    if (FLAGS_init_moves.size()) {
+        engine->Reset(FLAGS_init_moves);
+    }
 
     GoCoordId x, y;
     engine->GenMove(x, y);

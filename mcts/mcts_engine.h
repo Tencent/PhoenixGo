@@ -70,10 +70,11 @@ class MCTSEngine
     MCTSEngine(const MCTSConfig &config);
     ~MCTSEngine();
 
-    void Reset();
+    void Reset(const std::string &init_moves="");
     void Move(GoCoordId x, GoCoordId y);
     void GenMove(GoCoordId &x, GoCoordId &y);
     void GenMove(GoCoordId &x, GoCoordId &y, std::vector<int> &visit_count, float &v_resign);
+    bool Undo();
     const GoState &GetBoard();
     MCTSConfig &GetConfig();
     void SetPendingConfig(std::unique_ptr<MCTSConfig> config);
