@@ -278,13 +278,27 @@ still have to read the [main README](/README.md) for explanations
 The all-in-one command below has been tested to run successfully on 
 ubuntu 16.04 LTS and 18.04 LTS
 
-`sudo apt-get -y install pkg-config zip g++ zlib1g-dev unzip python git && git clone https://github.com/Tencent/PhoenixGo.git && cd PhoenixGo && wget https://github.com/bazelbuild/bazel/releases/download/0.11.1/bazel-0.11.1-installer-linux-x86_64.sh && chmod +x bazel-0.11.1-installer-linux-x86_64.sh && ./bazel-0.11.1-installer-linux-x86_64.sh --user && echo 'export PATH="$PATH:$HOME/bin"' >> ~/.bashrc && source ~/.bashrc && sudo ldconfig && wget https://github.com/Tencent/PhoenixGo/releases/download/trained-network-20b-v1/trained-network-20b-v1.tar.gz && tar xvzf trained-network-20b-v1.tar.gz && sudo rm -r trained-network-20b-v1.tar.gz bazel-0.11.1-installer-linux-x86_64.sh && ./configure && bazel build //mcts:mcts_main && ls`
+```
+sudo apt-get -y install pkg-config zip g++ zlib1g-dev unzip python git && \
+git clone https://github.com/Tencent/PhoenixGo.git && \
+cd PhoenixGo && \
+wget https://github.com/bazelbuild/bazel/releases/download/0.11.1/bazel-0.11.1-installer-linux-x86_64.sh && \
+chmod +x bazel-0.11.1-installer-linux-x86_64.sh && \
+./bazel-0.11.1-installer-linux-x86_64.sh --user && \
+echo 'export PATH="$PATH:$HOME/bin"' >> ~/.bashrc && source ~/.bashrc && \
+sudo ldconfig && \
+wget https://github.com/Tencent/PhoenixGo/releases/download/trained-network-20b-v1/trained-network-20b-v1.tar.gz && \
+tar xvzf trained-network-20b-v1.tar.gz && \
+rm trained-network-20b-v1.tar.gz bazel-0.11.1-installer-linux-x86_64.sh && \
+./configure && \
+bazel build //mcts:mcts_main
+```
 
 This all-in-one command will : 
 
 - Download and install bazel and PhoenixGo dependencies for ubuntu 
-and similar systems (need to have apt-get)
-- Clone PhoenixGo from Tencent github
+and similar systems (need `apt-get`)
+- Clone PhoenixGo from github
 - Download and install bazel 0.11.1
 - Do the post-install of bazel
 - Download and extract trained network (ckpt)

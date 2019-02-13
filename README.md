@@ -37,13 +37,8 @@ tested (especially for bazel).
 
 #### Download and Install Bazel 
 
-Before starting, you need to download and install bazel.
-
-You can download and install bazel for linux systems
-[here](https://docs.bazel.build/versions/master/install.html)
-
-There are different methods to download and install bazel depending 
-on your linux system and settings (apt-get, install .sh, etc..)
+Before starting, you need to download and install bazel,
+see [here](https://docs.bazel.build/versions/master/install.html).
 
 For PhoenixGo, bazel (**0.11.1 is known-good**), read 
 [Requirements](#requirements) for details
