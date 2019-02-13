@@ -1,8 +1,11 @@
-To reduce phoenixgo size and building time, it is wise to remove all the uneeded options during the bazel `./configure` , as was discussed here : [#76](https://github.com/Tencent/PhoenixGo/issues/76)
+To reduce phoenixgo size and building time, it is wise to remove all 
+the uneeded options during the bazel `./configure` , as was discussed 
+here : [#76](https://github.com/Tencent/PhoenixGo/issues/76)
 
 This is an example of minimalist options that you can use : 
 
-note : if you have trouble with path configurations, see [path-errors](/docs/path-errors.md)
+note : if you have trouble with path configurations, see 
+[path-errors](/docs/path-errors.md)
 
 ```
 Please specify the location of python. [Default is /usr/bin/python]: 

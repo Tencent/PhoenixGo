@@ -1,16 +1,24 @@
 # Benchmark setup :
 
 ## setup
-- hardware : gtx 1060 6gb (1gpu, power limit set to 75W), ryzen r7 1700, 16gb ram
-- software : ubuntu 16.04 LTS, nvidia 384, cuda 9.0, cudnn 7.1.4, tensorrt 3.0.4, bazel 0.11.1
-- engine settings: unlimited time per move, all time management settings disabled in config file, all the rest is default settings
+- hardware : gtx 1060 6gb (1gpu, power limit set to 75W), ryzen r7 1700, 
+16gb ram
+- software : ubuntu 16.04 LTS, nvidia 384, cuda 9.0, cudnn 7.1.4, 
+tensorrt 3.0.4, bazel 0.11.1
+- engine settings: unlimited time per move, all time management settings 
+disabled in config file, all the rest is default settings
 
 ## methodology : 
-- most moves come from the same game played using [gtp2ogs](https://github.com/online-go/gtp2ogs), for few moves moves, copy paste stderr output
-- tensorRT is only used with batch size 4, because batch size of 5 and more is not supported with default settings, see : [#75](https://github.com/Tencent/PhoenixGo/issues/75)
+- most moves come from the same game played using 
+[gtp2ogs](https://github.com/online-go/gtp2ogs), for few moves moves, 
+copy paste stderr output
+- tensorRT is only used with batch size 4, because batch size of 5 and 
+more is not supported with default settings, see : 
+[#75](https://github.com/Tencent/PhoenixGo/issues/75)
 
 ## credits :
-credit for doing this tests go to [wonderingabout](https://github.com/wonderingabout)
+credit for doing this tests go to 
+[wonderingabout](https://github.com/wonderingabout)
 
 ## BATCH SIZE 4 :
 
@@ -341,11 +349,16 @@ stderr: 9th move(b): cf, winrate=49.737022%, N=2402, Q=-0.005260, p=0.512962, v=
 ```
 # PERCENTAGES EXPLANATION : 
 
-The speed gain number below is the time less needed to calculate a move, for example speed gain +12% = 12% less time to calculate a move as compared to batch size 4 = 27.5 seconds vs 30.5 seconds per move = 4 seconds difference out of 30.5 seconds 
+The speed gain number below is the time less needed to calculate a move, 
+for example speed gain +12% = 12% less time to calculate a move as compared 
+to batch size 4 = 27.5 seconds vs 30.5 seconds per move = 4 seconds 
+difference out of 30.5 seconds 
 
 # CONCLUSIONS for GTX 1060 : 
 
-- TensorRT can increase speed by arround 15%-20% on a GTX 1060 with batch size 4 (for bigger batch size with tensorRT, see [#75](https://github.com/Tencent/PhoenixGo/issues/75))
+- TensorRT can increase speed by arround 15%-20% on a GTX 1060 with batch size 4 
+(for bigger batch size with tensorRT, see 
+[#75](https://github.com/Tencent/PhoenixGo/issues/75))
 - bigger batch size significantly increases speed of the engine on a GTX 1060 :
      -> for batch size 8 , gain = +12%
      -> for batch size 16 , gain = +33%
@@ -354,7 +367,8 @@ The speed gain number below is the time less needed to calculate a move, for exa
 - Compute device (GPU or CPU) utilization is higher with higher batching
 - gtx 1060 is too weak to benefit higher batch sizes than 32
 - number of threads does not significantly change speed of the engine
-- tree size does not significantly change the speed of the engine (arround 5% more time with max tree size)
+- tree size does not significantly change the speed of the engine 
+(arround 5% more time with max tree size)
 
 # TO DO : 
 - i will try higher batch sizes with a Tesla V100 on windows 10

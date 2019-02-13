@@ -1,4 +1,6 @@
-For your convenience, a copy of  `./mcts_main --help` output is provided to you below
+For your convenience, a copy of  `./mcts_main --help` output is provided to 
+you below 
+
 Date is January 2019, so it may be outdated if newer versions are released
 
 `./mcts_main --help`
