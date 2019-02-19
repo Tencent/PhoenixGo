@@ -45,7 +45,7 @@ For PhoenixGo, bazel (**0.11.1 is known-good**), read
 
 If you have issues on how to install or start bazel, you may want 
 to try this all-in-one command line for easier building instead, see
-[FAQ question](/docs/FAQ.md#b0-it-is-too-hard-to-install-bazel-or-run-the-bazel-commands)
+[FAQ question](/docs/FAQ.md#b0-it-is-too-hard-to-install-bazel-or-start-bazel)
 
 #### Building PhoenixGo with Bazel
 
@@ -120,10 +120,12 @@ path to your config file
 - it is also needed to edit your config file (.conf) and manually add 
 the full path to ckpt, see 
 [FAQ question](/docs/FAQ.md/#a5-ckptzerockpt-20b-v1fp32plan-error-no-such-file-or-directory).
-You can also change options in config file, see [#configure-guide](#configure-guide).
-- for other command line options , see also [#command-line-options](#command-line-options) 
-for details, or run `./mcts_main --help` . A copy of the `--help` is provided for your 
-convenience [here](/docs/mcts-main-help.md)
+You can also change options in config file, see 
+[#configure-guide](#configure-guide).
+- for other command line options , see also 
+[#command-line-options](#command-line-options) 
+for details, or run `./mcts_main --help` . A copy of the `--help` is 
+provided for your convenience [here](/docs/mcts-main-help.md)
 
 For example:
 
@@ -194,7 +196,8 @@ Then follow the document included in the archive : how to install
 phoenixgo.pdf
 
 note : to support special features like CUDA 10.0 or AVX512 for example, 
-you can build your own build for windows, see [#79](https://github.com/Tencent/PhoenixGo/issues/79)
+you can build your own build for windows, see 
+[#79](https://github.com/Tencent/PhoenixGo/issues/79)
 
 ##### CPU-only version : 
 
@@ -251,7 +254,8 @@ Read `mcts/mcts_config.proto` for more config options.
 
 * `--config_path`: path of config file
 * `--gtp`: run as a GTP engine, if disable, gen next move only
-* `--init_moves`: initial moves on the go board, for example usage, see [#83](https://github.com/Tencent/PhoenixGo/issues/83)
+* `--init_moves`: initial moves on the go board, for example usage, see 
+[FAQ question](/docs/FAQ.md/#a8-how-make-phoenixgo-start-at-other-position-at-move-1-and-after)
 * `--gpu_list`: override `gpu_list` in config file
 * `--listen_port`: work with `--gtp`, run gtp engine on port in TCP protocol
 * `--allow_ip`: work with `--listen_port`, list of client ip allowed to connect
@@ -270,17 +274,17 @@ A copy of the `--help` is provided for your convenience
 
 ## Analysis
 
-It is possible to analyse .sgf files using analysis tools such as :
+For analysis purpose, an easy way to display the PV (variations for 
+main move path) is `--logtostderr --v=1` which will display the main 
+move path winrate and continuation of moves analyzed, see 
+[FAQ question](/docs/FAQ.md/#a2-where-is-the-pv-analysis-) for details
+
+It is also possible to analyse .sgf files using analysis tools such as :
 - [GoReviewPartner](https://github.com/pnprog/goreviewpartner) : 
 an automated tool to analyse and/or review one or many .sgf files 
 (saved as .rsgf file). It supports PhoenixGo and other bots. See 
 [FAQ question](/docs/FAQ.md/#a25-how-to-analyzereview-one-or-many-sgf-files-with-goreviewpartner) 
 for details
-
-For analysis purpose, an easy way to display the PV (variations for 
-main move path) is `--logtostderr --v=1` which will display the main 
-move path winrate and continuation of moves analyzed, see 
-[FAQ question](/docs/FAQ.md/#a2-where-is-the-pv-analysis-) for details
 
 ## FAQ
 
