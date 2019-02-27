@@ -1,3 +1,0 @@
-import %workspace%/third_party/tensorflow/bazel.rc
-
-build --config=opt
