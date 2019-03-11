@@ -27,7 +27,7 @@ If you use PhoenixGo in your research, please consider citing the library as fol
 #### Requirements
 
 * GCC with C++11 support
-* Bazel (**0.11.1 is known-good**)
+* Bazel (**0.19.2 is known-good**)
 * (Optional) CUDA and cuDNN for GPU support 
 * (Optional) TensorRT (for accelerating computation on GPU, 3.0.4 is known-good)
 
@@ -40,7 +40,7 @@ tested (especially for bazel).
 Before starting, you need to download and install bazel,
 see [here](https://docs.bazel.build/versions/master/install.html).
 
-For PhoenixGo, bazel (**0.11.1 is known-good**), read 
+For PhoenixGo, bazel (**0.19.2 is known-good**), read 
 [Requirements](#requirements) for details
 
 If you have issues on how to install or start bazel, you may want 
