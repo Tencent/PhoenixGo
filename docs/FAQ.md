@@ -282,14 +282,14 @@ ubuntu 16.04 LTS and 18.04 LTS
 sudo apt-get -y install pkg-config zip g++ zlib1g-dev unzip python git && \
 git clone https://github.com/Tencent/PhoenixGo.git && \
 cd PhoenixGo && \
-wget https://github.com/bazelbuild/bazel/releases/download/0.11.1/bazel-0.11.1-installer-linux-x86_64.sh && \
-chmod +x bazel-0.11.1-installer-linux-x86_64.sh && \
-./bazel-0.11.1-installer-linux-x86_64.sh --user && \
+wget https://github.com/bazelbuild/bazel/releases/download/0.19.2/bazel-0.19.2-installer-linux-x86_64.sh && \
+chmod +x bazel-0.19.2-installer-linux-x86_64.sh && \
+./bazel-0.19.2-installer-linux-x86_64.sh --user && \
 echo 'export PATH="$PATH:$HOME/bin"' >> ~/.bashrc && source ~/.bashrc && \
 sudo ldconfig && \
 wget https://github.com/Tencent/PhoenixGo/releases/download/trained-network-20b-v1/trained-network-20b-v1.tar.gz && \
 tar xvzf trained-network-20b-v1.tar.gz && \
-rm trained-network-20b-v1.tar.gz bazel-0.11.1-installer-linux-x86_64.sh && \
+rm trained-network-20b-v1.tar.gz bazel-0.19.2-installer-linux-x86_64.sh && \
 ./configure && \
 bazel build //mcts:mcts_main
 ```
@@ -299,7 +299,7 @@ This all-in-one command will :
 - Download and install bazel and PhoenixGo dependencies for ubuntu 
 and similar systems (need `apt-get`)
 - Clone PhoenixGo from github
-- Download and install bazel 0.11.1
+- Download and install bazel 0.19.2
 - Do the post-install of bazel
 - Download and extract trained network (ckpt)
 - Cleanup : trained network archive and remove bazel installer
@@ -318,7 +318,7 @@ for an example of build configure
 
 If you are still getting errors, try using an older version of bazel. 
 For example bazel 0.20.0 is known to cause issues, and 
-**bazel 0.11.1 is known good**
+**bazel 0.19.2 is known good**
 
 #### B2. The PhoenixGo and bazel folders are too big
 
