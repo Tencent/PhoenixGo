@@ -11,31 +11,34 @@ I0514 12:51:32.724236 14467 mcts_engine.cc:157] 1th move(b): dp, <b>winrate=44.1
 #### A2. Where is the PV (Analysis) ?
 
 It is possible to display the PV (variation of move path with 
-continuation of the moves)
+continuation of the moves : `main move path`, `second move path`,
+`third move path`)
 
 An easy way to do that is for example to increase verbose level, 
 for example `--logtostderr --v=1` 
-(on windows the syntax is different, see 
+(for windows the syntax is different, see 
 [FAQ question](/docs/FAQ.md#a4-syntax-error-windows) for details
 
-result is something like this (in this example there are 
-7000 simulations per move) :
+result is something like this (there are 30000 simulations 
+in that example) :
 
 ```
-[5489] stderr: I0116 15:55:09.910559  5489 mcts_debugger.cc:43] ========== debug info for 27th move(b) begin ==========
-[5489] stderr: I0116 15:55:09.910596  5489 mcts_debugger.cc:44] main move path: mg(6482,-0.12,0.89,-0.09),lf(6349,0.12,0.88,0.08),lg(3006,-0.12,0.53,-0.12),kf(2654,0.14,0.63,-0.01),qh(941,-0.11,0.16,-0.11),qi(785,0.12,0.77,0.13),rh(784,-0.12,0.98,-0.13),pi(538,0.13,0.52,0.09),rg(445,-0.12,0.73,-0.18),og(365,0.13,0.76,0.15),pf(363,-0.13,0.98,-0.19),rd(159,0.10,0.52,0.14),ql(47,-0.06,0.21,-0.18),oq(19,0.04,0.36,-0.03),nq(12,-0.05,0.58,-0.07),pq(11,0.05,0.97,0.03),np(10,-0.05,0.79,-0.12),qn(9,0.04,0.84,0.03),ol(8,-0.05,0.82,-0.05),fc(6,0.07,0.60,0.06),kg(4,-0.06,0.42,-0.13),jf(2,-0.02,0.53,0.02),jg(1,0.05,0.45,0.05),cg(0,-nan,0.00,nan)
-[5489] stderr: I0116 15:55:09.910604  5489 mcts_debugger.cc:139] mg: N=6482, W=-757.077, Q=-0.116797, p=0.887549, v=-0.0932888
-[5489] stderr: I0116 15:55:09.910609  5489 mcts_debugger.cc:139] oh: N=262, W=-38.6935, Q=-0.147685, p=0.0710239, v=-0.137658
-[5489] stderr: I0116 15:55:09.910614  5489 mcts_debugger.cc:139] qh: N=38, W=-6.34157, Q=-0.166883, p=0.0139782, v=-0.144544
-[5489] stderr: I0116 15:55:09.910617  5489 mcts_debugger.cc:139] nb: N=1, W=-0.294998, Q=-0.294998, p=0.000126838, v=-0.295011
-[5489] stderr: I0116 15:55:09.910621  5489 mcts_debugger.cc:139] lc: N=1, W=-0.354553, Q=-0.354553, p=0.000164667, v=-0.354567
-[5489] stderr: I0116 15:55:09.910626  5489 mcts_debugger.cc:139] ob: N=1, W=-0.28775, Q=-0.28775, p=0.000373717, v=-0.287757
-[5489] stderr: I0116 15:55:09.910630  5489 mcts_debugger.cc:139] oj: N=1, W=-0.359818, Q=-0.359818, p=0.000128213, v=-0.359819
-[5489] stderr: I0116 15:55:09.910634  5489 mcts_debugger.cc:139] rc: N=1, W=-0.30574, Q=-0.30574, p=0.000222438, v=-0.305748
-[5489] stderr: I0116 15:55:09.910639  5489 mcts_debugger.cc:139] oc: N=1, W=-0.281403, Q=-0.281403, p=0.000368299, v=-0.281408
-[5489] stderr: I0116 15:55:09.910642  5489 mcts_debugger.cc:139] qd: N=1, W=-0.288712, Q=-0.288712, p=0.00012808, v=-0.288724
-[5489] stderr: I0116 15:55:09.910646  5489 mcts_debugger.cc:48] model global step: 639200
-[5489] stderr: I0116 15:55:09.910648  5489 mcts_debugger.cc:49] ========== debug info for 27th move(b) end   ==========
+mcts_debugger.cc:43] ========== debug info for 1th move(b) begin ==========
+mcts_debugger.cc:44] main move path: dd(2959,-0.12,0.08,-0.11),pp(762,0.12,0.22,0.11),dq(142,-0.12,0.16,-0.12),pd(107,0.12,0.70,0.11),nq(21,-0.12,0.17,-0.13),co(6,0.13,0.24,0.14),fp(3,-0.13,0.36,-0.13),cc(2,0.13,0.31,0.11),cd(1,-0.14,0.92,-0.14),dk(0,-nan,0.00,nan)
+mcts_debugger.cc:45] second move path: pd(2930,-0.12,0.08,-0.11),dp(745,0.12,0.22,0.11),cd(136,-0.12,0.16,-0.12),pp(102,0.12,0.70,0.11),cn(19,-0.12,0.16,-0.13),ec(6,0.13,0.24,0.13),df(3,-0.13,0.36,-0.11),qc(2,0.13,0.32,0.12),pc(1,-0.14,0.90,-0.14),dj(0,-nan,0.00,nan)
+mcts_debugger.cc:46] third move path: dp(2911,-0.12,0.08,-0.12),pd(765,0.12,0.23,0.10),qp(144,-0.12,0.16,-0.12),dd(109,0.12,0.70,0.11),qf(20,-0.12,0.16,-0.12),oq(6,0.13,0.23,0.12),pn(3,-0.13,0.36,-0.13),cq(2,0.13,0.31,0.13),dq(1,-0.14,0.91,-0.14),im(0,-nan,0.00,nan)
+mcts_debugger.cc:140] dd: N=2959, W=-346.395, Q=-0.117065, p=0.0802264, v=-0.113951
+mcts_debugger.cc:140] pd: N=2930, W=-343.235, Q=-0.117145, p=0.0792342, v=-0.113951
+mcts_debugger.cc:140] dp: N=2911, W=-340.83, Q=-0.117083, p=0.0783167, v=-0.116534
+mcts_debugger.cc:140] pp: N=2840, W=-332.817, Q=-0.117189, p=0.0770947, v=-0.120119
+mcts_debugger.cc:140] dq: N=2363, W=-279.487, Q=-0.118277, p=0.0700366, v=-0.117204
+mcts_debugger.cc:140] cd: N=2330, W=-275.263, Q=-0.118138, p=0.0683769, v=-0.116526
+mcts_debugger.cc:140] qp: N=2321, W=-273.97, Q=-0.118039, p=0.0676945, v=-0.12072
+mcts_debugger.cc:140] dc: N=2295, W=-271.415, Q=-0.118264, p=0.0683262, v=-0.116526
+mcts_debugger.cc:140] cp: N=2262, W=-267.68, Q=-0.118338, p=0.0675763, v=-0.12072
+mcts_debugger.cc:140] qd: N=2261, W=-268.092, Q=-0.118572, p=0.0687082, v=-0.118771
+mcts_debugger.cc:50] model global step: 639200
+mcts_debugger.cc:51] ========== debug info for 1th move(b) end   ==========
 ```
 
 It is also possible to develop all the tree by adding these lines to 
@@ -69,8 +72,8 @@ to `--log_dir={log_dir}`, then you could read your log from
 For windows,
 - in config file, 
 
-you need to write path with `/` and not `\` in the config 
-file .conf, for example : 
+you need **to write path with `/` and not `\` in the config file** 
+ .conf, for example : 
 
 ```
 model_config {
@@ -79,8 +82,10 @@ model_config {
 
 - in cmd.exe,
 
-Here you need to write paths with `\` and not `/`. 
-Also command format on windows needs a space and not a `=`, for 
+Here you need to **write paths with `\` and not `/` in command line**, 
+it is the opposite for command line. 
+
+Also command format **on command line needs a space and not a `=`**, for 
 example : 
 
 `mcts_main.exe --gtp --config_path C:\Users\amd2018\Downloads\PhoenixGo\etc\mcts_1gpu_notensorrt.conf`
@@ -132,12 +137,36 @@ See also [#22](https://github.com/Tencent/PhoenixGo/issues/22).
 
 Modify `timeout_ms_per_step` in your config file.
 
-#### A8. How make PhoenixGo think with constant time per move?
+For example `5000` is 5 seconds per move.
+
+#### A7.5. How make PhoenixGo think with constant time per move?
 
 Modify your config file. `early_stop`, `unstable_overtime`, 
 `behind_overtime` and`time_control` are options that affect the 
 search time, remove them if exist then
 each move will cost constant time/simulations.
+
+#### A8. How make PhoenixGo start at other position at move 1 and after
+
+- In command line, you can add the command flag `--init_moves`, 
+for example :
+
+```
+$ bazel-bin/mcts/mcts_main --gtp --config_path=etc/mcts_1gpu.conf --logtostderr --v=1 --init_moves="dp,zz,qe,zz,dd,qp,zz,qg,zz,pc,oq,pn,od,pd,pe,oe,of,ne,pg,md,pi"
+```
+
+In this example we start at move 22, see also 
+[#83](https://github.com/Tencent/PhoenixGo/issues/83) for 
+screenshots
+
+For windows the syntax is different, see 
+[FAQ question](/docs/FAQ.md/#a4-syntax-error-windows) for details
+
+You can also use the GTP command `undo` to cancel last move only, 
+the undo command can be repeated many times if want
+
+- In non command line, you can open your .sgf file in a sgf 
+viewer like Sabaki for example
 
 #### A9. What is the speed of the engine ? How can i make the engine think faster ?
 
@@ -147,16 +176,20 @@ supported)
 TensorRT also increases significantly the speed of computation, 
 but it is only available for linux with a compatible nvidia GPU
 
-Bigger batch size significantly increases the speed of the computation, 
-but a bigger batch size puts a bigger burden on the computation device 
-(in case it is the GPU, higher GPU load, higher VRAM usage), increase 
-it only if your computation device can handle it
+Bigger batch size significantly increases the speed of the 
+computation, but a bigger batch size puts a bigger burden on the 
+computation device (in case it is the GPU, higher GPU load, higher 
+VRAM usage), increase it only if your computation device can handle 
+it
 
 Some independent speed benchmarks have been run, they are available 
 in the docs :
 
-- for GTX 1060 : 
-[benchmark testing batch size from 4 to 64, tree size up to 2000M, max children up to 512, with tensorRT ON and OFF](/docs/benchmark-gtx1060.md)
+- for GTX 1060 75W (75w power limit) : 
+[benchmark testing batch size from 4 to 64, tree size up to 2000M, max children up to 512, with tensorRT ON and OFF](/docs/benchmark-gtx1060-75w.md)
+
+- for Tesla V100 :
+[benchmark testing batch size from 4 to 128, 4 to 12 vcpu, no tensorrt](/docs/benchmark-teslaV100.md)
 
 #### A10. GTP command `time_settings` doesn't work.
 
@@ -203,6 +236,7 @@ genmove
 final_score
 get_debug_info
 get_last_move_debug_info
+undo
 ```
 
 If you use unsupported commands the engine will not work. Make sure your 
@@ -231,10 +265,6 @@ you GTP tool to tell PhoenixGo engine that the komi for the game is
 if you do that, the game will not be scored correctly because PhoenixGo 
 will think that the komi is 7.5 while the real komi is different, but at 
 least PhoenixGo will be able to play the game.
- 
-An example for [gtp2ogs](https://github.com/online-go/gtp2ogs) is provided 
-[here](https://github.com/wonderingabout/gtp2ogs-tutorial/blob/master/docs/3A4-linux-optional-edit-gtp2ogs-js-file.md) 
-and [here](https://github.com/wonderingabout/gtp2ogs-tutorial/blob/master/docs/3B4-windows-optional-edit-gtp2ogs-js-file.md)
 
 #### A13. I have a nvidia RTX card (Turing) or Tesla V100/Titan V (Volta), is it compatible ?
 
@@ -252,12 +282,15 @@ which is currently not supported by PhoenixGo)
 
 - are compatible with cuda 9.0 and higher (it is recommended to 
 use latest version when possible),
-cudnn 7.1.x or higher (x is any number)
+cudnn 7.1.x and higher (x is any number)
 - has been tested to work successfully on windows
 - to use TensorRT with V100, you need to manually build TensorRT 
 model on V100.
 See: [#75](https://github.com/Tencent/PhoenixGo/issues/75) for 
 how to build TensorRT model.
+
+You can find a speed benchmark for Tesla V100 in 
+[FAQ question](/docs/FAQ.md#a9-what-is-the-speed-of-the-engine--how-can-i-make-the-engine-think-faster-)
 
 ### Specific questions : bazel issues (linux and mac)
 
